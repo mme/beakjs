@@ -6,7 +6,7 @@ on:
       - release
 
 jobs:
-  publish-root:
+  release:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -15,51 +15,61 @@ jobs:
         with:
           node-version: "14"
           registry-url: "https://registry.npmjs.org"
-      - name: Install dependencies and build
+       - name: Install dependencies and build (core)
         run: |
           yarn install
           yarn build
-      - name: Publish to npm
-        run: npm publish --access public
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
-
-  publish-core:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: "14"
-          registry-url: "https://registry.npmjs.org"
-      - name: Install dependencies and build (core)
-        run: |
-          cd packages/core
-          yarn install
-          yarn build
-      - name: Publish to npm (core)
-        run: npm publish --access public
         working-directory: ./packages/core
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
-
-  publish-react:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: "14"
-          registry-url: "https://registry.npmjs.org"
       - name: Install dependencies and build (react)
         run: |
-          cd packages/react
           yarn install
           yarn build
-      - name: Publish to npm (react)
-        run: npm publish --access public
         working-directory: ./packages/react
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+      - name: Install dependencies and build (root)
+        run: |
+          yarn install
+          yarn build    
+  #     # - name: Publish to npm
+  #     #   run: npm publish --access public
+  #     #   env:
+  #     #     NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+
+  # publish-core:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - name: Set up Node.js
+  #       uses: actions/setup-node@v2
+  #       with:
+  #         node-version: "14"
+  #         registry-url: "https://registry.npmjs.org"
+  #     - name: Install dependencies and build (core)
+  #       run: |
+  #         cd packages/core
+  #         yarn install
+  #         yarn build
+  #     - name: Publish to npm (core)
+  #       run: npm publish --access public
+  #       working-directory: ./packages/core
+  #       env:
+  #         NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+
+  # publish-react:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - name: Set up Node.js
+  #       uses: actions/setup-node@v2
+  #       with:
+  #         node-version: "14"
+  #         registry-url: "https://registry.npmjs.org"
+  #     - name: Install dependencies and build (react)
+  #       run: |
+  #         cd packages/react
+  #         yarn install
+  #         yarn build
+  #     - name: Publish to npm (react)
+  #       run: npm publish --access public
+  #       working-directory: ./packages/react
+  #       env:
+  #         NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
