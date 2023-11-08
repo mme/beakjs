@@ -4,6 +4,7 @@ import * as fs from "fs";
 const versionFilePath = "./VERSION";
 const rootPackageJsonPath = "./package.json";
 const otherPackageJsonPaths = [
+  rootPackageJsonPath,
   "./packages/core/package.json",
   "./packages/react/package.json",
 ];
