@@ -51,5 +51,8 @@
     "testPathIgnorePatterns": [
       "/node_modules/"
     ]
-  }
+  },
+  "files": [
+    "dist/**/*"
+  ]
 }
