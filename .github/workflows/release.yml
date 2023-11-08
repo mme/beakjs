@@ -15,7 +15,7 @@ jobs:
         with:
           node-version: "14"
           registry-url: "https://registry.npmjs.org"
-       - name: Install dependencies and build (core)
+      - name: Install dependencies and build (core)
         run: |
           yarn install
           yarn build
@@ -28,4 +28,4 @@ jobs:
       - name: Install dependencies and build (root)
         run: |
           yarn install
-          yarn build    
+          yarn build
