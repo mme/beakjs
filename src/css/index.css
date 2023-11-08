@@ -1,0 +1,199 @@
+:root {
+  --beak-primary-color: rgb(59 130 246);
+  --beak-contrast-color: rgb(255 255 255);
+  --beak-secondary-color: rgb(243 244 246);
+  --beak-secondary-contrast-color: rgb(0 0 0);
+  --beak-background-color: rgb(255 255 255);
+  --beak-muted-color: rgb(106 106 106);
+  --beak-separator-color: rgba(0, 0, 0, 0.08);
+  --beak-scrollbar-color: rgba(0, 0, 0, 0.2);
+
+  /* The background color of the open/close button */
+  --beak-button-background-color: var(--beak-primary-color);
+
+  /* The color of the icon in the open/close button */
+  --beak-button-icon-color: var(--beak-contrast-color);
+
+  /* The background color of the header of the chat window */
+  --beak-header-background-color: var(--beak-primary-color);
+
+  /* The color of the title in the header of the chat window */
+  --beak-header-title-color: var(--beak-contrast-color);
+
+  /* The color of the close button in the header of the chat window */
+  --beak-header-close-button-color: var(--beak-contrast-color);
+
+  /* The color of the separator between the header and the messages area */
+  --beak-header-separator-color: var(--beak-separator-color);
+
+  /* The background color of the input area */
+  --beak-input-background-color: var(--beak-background-color);
+
+  /* The color of the send button */
+  --beak-input-send-button-color: var(--beak-primary-color);
+
+  /* The color of the send button when disabled */
+  --beak-input-send-button-disabled-color: var(--beak-muted-color);
+
+  /* The color of the placeholder text in the input area */
+  --beak-input-placeholder-color: var(--beak-muted-color);
+
+  /* The color of the text in the input area */
+  --beak-input-color: var(--beak-secondary-contrast-color);
+
+  /* The color of the separator between the input area and the messages area */
+  --beak-input-separator-color: var(--beak-separator-color);
+
+  /* The background color of the messages area */
+  --beak-messages-background-color: var(--beak-background-color);
+
+  /* The background color of a user message */
+  --beak-message-user-background-color: var(--beak-primary-color);
+  --beak-message-user-color: var(--beak-contrast-color);
+
+  /* The background color of a assistant message */
+  --beak-message-assistant-background-color: var(--beak-secondary-color);
+  --beak-message-assistant-color: var(--beak-secondary-contrast-color);
+
+  /*
+   * Dark Mode
+   */
+
+  --beak-dark-primary-color: rgb(59 130 246);
+  --beak-dark-contrast-color: rgb(255 255 255);
+  --beak-dark-secondary-color: rgb(37, 36, 42);
+  --beak-dark-secondary-contrast-color: rgb(255 255 255);
+  --beak-dark-background-color: rgb(0 0 0);
+  --beak-dark-muted-color: rgb(106 106 106);
+  --beak-dark-separator-color: rgba(255, 255, 255, 0.15);
+  --beak-dark-scrollbar-color: rgba(255, 255, 255, 0.3);
+  --beak-dark-button-background-color: var(--beak-dark-primary-color);
+  --beak-dark-button-icon-color: var(--beak-dark-contrast-color);
+  --beak-dark-header-background-color: var(--beak-dark-primary-color);
+  --beak-dark-header-title-color: var(--beak-dark-contrast-color);
+  --beak-dark-header-close-button-color: var(--beak-dark-contrast-color);
+  --beak-dark-header-separator-color: var(--beak-dark-separator-color);
+  --beak-dark-input-background-color: var(--beak-dark-background-color);
+  --beak-dark-input-send-button-color: var(--beak-dark-primary-color);
+  --beak-dark-input-send-button-disabled-color: var(--beak-dark-muted-color);
+  --beak-dark-input-placeholder-color: var(--beak-dark-muted-color);
+  --beak-dark-input-color: var(--beak-dark-secondary-contrast-color);
+  --beak-dark-input-separator-color: var(--beak-dark-separator-color);
+  --beak-dark-messages-background-color: var(--beak-dark-background-color);
+  --beak-dark-message-user-background-color: var(--beak-dark-primary-color);
+  --beak-dark-message-user-color: var(--beak-dark-contrast-color);
+  --beak-dark-message-assistant-background-color: var(
+    --beak-dark-secondary-color
+  );
+  --beak-dark-message-assistant-color: var(
+    --beak-dark-secondary-contrast-color
+  );
+}
+
+.beak-dark-theme,
+.beak-dark-theme * {
+  color-scheme: light dark;
+  --beak-primary-color: var(--beak-dark-primary-color);
+  --beak-contrast-color: var(--beak-dark-contrast-color);
+  --beak-secondary-color: var(--beak-dark-secondary-color);
+  --beak-secondary-contrast-color: var(--beak-dark-secondary-contrast-color);
+  --beak-background-color: var(--beak-dark-background-color);
+  --beak-muted-color: var(--beak-dark-muted-color);
+  --beak-separator-color: var(--beak-dark-separator-color);
+  --beak-scrollbar-color: var(--beak-dark-scrollbar-color);
+  --beak-button-background-color: var(--beak-dark-button-background-color);
+  --beak-button-icon-color: var(--beak-dark-button-icon-color);
+  --beak-header-background-color: var(--beak-dark-header-background-color);
+  --beak-header-title-color: var(--beak-dark-header-title-color);
+  --beak-header-close-button-color: var(--beak-dark-header-close-button-color);
+  --beak-header-separator-color: var(--beak-dark-header-separator-color);
+  --beak-input-background-color: var(--beak-dark-input-background-color);
+  --beak-input-send-button-color: var(--beak-dark-input-send-button-color);
+  --beak-input-send-button-disabled-color: var(
+    --beak-dark-input-send-button-disabled-color
+  );
+  --beak-input-placeholder-color: var(--beak-dark-input-placeholder-color);
+  --beak-input-color: var(--beak-dark-input-color);
+  --beak-input-separator-color: var(--beak-dark-input-separator-color);
+  --beak-messages-background-color: var(--beak-dark-messages-background-color);
+  --beak-message-user-background-color: var(
+    --beak-dark-message-user-background-color
+  );
+  --beak-message-user-color: var(--beak-dark-message-user-color);
+  --beak-message-assistant-background-color: var(
+    --beak-dark-message-assistant-background-color
+  );
+  --beak-message-assistant-color: var(--beak-dark-message-assistant-color);
+}
+
+@media (prefers-color-scheme: dark) {
+  .beak-dark-theme,
+  .beak-dark-theme * {
+    color-scheme: light dark;
+    --beak-primary-color: var(--beak-dark-primary-color);
+    --beak-contrast-color: var(--beak-dark-contrast-color);
+    --beak-secondary-color: var(--beak-dark-secondary-color);
+    --beak-secondary-contrast-color: var(--beak-dark-secondary-contrast-color);
+    --beak-background-color: var(--beak-dark-background-color);
+    --beak-muted-color: var(--beak-dark-muted-color);
+    --beak-separator-color: var(--beak-dark-separator-color);
+    --beak-scrollbar-color: var(--beak-dark-scrollbar-color);
+    --beak-button-background-color: var(--beak-dark-button-background-color);
+    --beak-button-icon-color: var(--beak-dark-button-icon-color);
+    --beak-header-background-color: var(--beak-dark-header-background-color);
+    --beak-header-title-color: var(--beak-dark-header-title-color);
+    --beak-header-close-button-color: var(
+      --beak-dark-header-close-button-color
+    );
+    --beak-header-separator-color: var(--beak-dark-header-separator-color);
+    --beak-input-background-color: var(--beak-dark-input-background-color);
+    --beak-input-send-button-color: var(--beak-dark-input-send-button-color);
+    --beak-input-send-button-disabled-color: var(
+      --beak-dark-input-send-button-disabled-color
+    );
+    --beak-input-placeholder-color: var(--beak-dark-input-placeholder-color);
+    --beak-input-color: var(--beak-dark-input-color);
+    --beak-input-separator-color: var(--beak-dark-input-separator-color);
+    --beak-messages-background-color: var(
+      --beak-dark-messages-background-color
+    );
+    --beak-message-user-background-color: var(
+      --beak-dark-message-user-background-color
+    );
+    --beak-message-user-color: var(--beak-dark-message-user-color);
+    --beak-message-assistant-background-color: var(
+      --beak-dark-message-assistant-background-color
+    );
+    --beak-message-assistant-color: var(--beak-dark-message-assistant-color);
+  }
+}
+
+.beakActivityDot1 {
+  animation: beakActivityDotsAnimation 1.05s infinite;
+}
+.beakActivityDot2 {
+  animation-delay: 0.1s;
+}
+.beakActivityDot3 {
+  animation-delay: 0.2s;
+}
+@keyframes beakActivityDotsAnimation {
+  0%,
+  57.14% {
+    animation-timing-function: cubic-bezier(0.33, 0.66, 0.66, 1);
+    transform: translate(0);
+  }
+  28.57% {
+    animation-timing-function: cubic-bezier(0.33, 0, 0.66, 0.33);
+    transform: translateY(-6px);
+  }
+  100% {
+    transform: translate(0);
+  }
+}
+
+@keyframes beakSpinAnimation {
+  to {
+    transform: rotate(360deg);
+  }
+}

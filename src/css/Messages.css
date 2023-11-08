@@ -1,0 +1,56 @@
+.beakMessages {
+  overflow-y: scroll;
+  flex: 1;
+  padding: 1rem 2rem;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--beak-messages-background-color);
+}
+
+.beakMessages::-webkit-scrollbar {
+  width: 9px;
+}
+
+.beakMessages::-webkit-scrollbar-thumb {
+  background-color: var(--beak-scrollbar-color);
+  border-radius: 10rem;
+  border: 2px solid var(--beak-messages-background-color);
+}
+
+.beakMessages::-webkit-scrollbar-track-piece:start {
+  background: transparent;
+}
+
+.beakMessages::-webkit-scrollbar-track-piece:end {
+  background: transparent;
+}
+
+.beakMessage {
+  border-radius: 0.5rem;
+  padding: 1rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  overflow-wrap: break-word;
+  max-width: 80%;
+  margin-bottom: 0.5rem;
+}
+
+.beakMessage.beakUserMessage {
+  background: var(--beak-message-user-background-color);
+  color: var(--beak-message-user-color);
+  margin-left: auto;
+}
+
+.beakMessage.beakAssistantMessage {
+  background: var(--beak-message-assistant-background-color);
+  color: var(--beak-message-assistant-color);
+  margin-right: auto;
+}
+
+.beakMessage.beakUserMessage + .beakMessage.beakAssistantMessage {
+  margin-top: 1.5rem;
+}
+
+.beakMessage.beakAssistantMessage + .beakMessage.beakUserMessage {
+  margin-top: 1.5rem;
+}

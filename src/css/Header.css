@@ -1,0 +1,39 @@
+.beakHeader {
+  height: 56px;
+  font-weight: 500;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  background-color: var(--beak-header-background-color);
+  color: var(--beak-header-title-color);
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-bottom: 1px solid var(--beak-header-separator-color);
+}
+
+@media (min-width: 640px) {
+  .beakHeader {
+    padding-left: 24px;
+    padding-right: 24px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+  }
+}
+
+.beakHeader > button {
+  border: 0;
+  padding: 0px;
+  position: absolute;
+  top: 50%;
+  right: 16px;
+  transform: translateY(-50%);
+  outline: none;
+  color: var(--beak-header-close-button-color);
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.beakHeader > button:focus {
+  outline: none;
+}

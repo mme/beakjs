@@ -1,0 +1,54 @@
+.beakButton {
+  width: 3.5rem;
+  height: 3.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  outline: none;
+  position: relative;
+  transform: scale(1);
+  transition: transform 200ms;
+  background-color: var(--beak-button-background-color);
+  color: var(--beak-button-icon-color);
+  cursor: pointer;
+}
+
+.beakButton:hover {
+  transform: scale(1.1);
+}
+
+.beakButton:active {
+  transform: scale(0.75);
+}
+
+.beakButtonIcon {
+  transition: opacity 100ms, transform 300ms;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* State when the chat is open */
+.beakButton.open .beakButtonIconOpen {
+  transform: translate(-50%, -50%) scale(0) rotate(90deg);
+  opacity: 0;
+}
+
+.beakButton.open .beakButtonIconClose {
+  transform: translate(-50%, -50%) scale(1) rotate(0deg);
+  opacity: 1;
+}
+
+/* State when the chat is closed */
+.beakButton:not(.open) .beakButtonIconOpen {
+  transform: translate(-50%, -50%) scale(1) rotate(0deg);
+  opacity: 1;
+}
+
+.beakButton:not(.open) .beakButtonIconClose {
+  transform: translate(-50%, -50%) scale(0) rotate(-90deg);
+  opacity: 0;
+}

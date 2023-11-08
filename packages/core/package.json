@@ -1,0 +1,31 @@
+{
+  "name": "@beakjs/core",
+  "version": "0.0.1",
+  "description": "Core library for BeakJS",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "prepublishOnly": "yarn build"
+  },
+  "files": [
+    "dist/**/*"
+  ],
+  "dependencies": {
+    "eventemitter3": "^5.0.1",
+    "js-tiktoken": "^1.0.7",
+    "jsonrepair": "^3.2.4",
+    "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "@types/uuid": "^9.0.6",
+    "typescript": "^5.0.4"
+  },
+  "peerDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mme/beakjs.git"
+  },
+  "author": "Markus Ecker",
+  "license": "MIT"
+}

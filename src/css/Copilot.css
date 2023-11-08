@@ -1,0 +1,60 @@
+.beakCopilot {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  z-index: 30;
+  line-height: 1.5;
+  -webkit-text-size-adjust: 100%;
+  -moz-tab-size: 4;
+  -o-tab-size: 4;
+  tab-size: 4;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-feature-settings: normal;
+  font-variation-settings: normal;
+  touch-action: manipulation;
+}
+
+.beakCopilot svg {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.beakWindow {
+  position: fixed;
+  inset: 0px;
+  transform-origin: bottom;
+  border-color: rgb(229 231 235);
+  background-color: rgb(255 255 255);
+  border-radius: 0.75rem;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 5px 40px;
+  flex-direction: column;
+  transition: opacity 100ms ease-out, transform 200ms ease-out;
+  opacity: 0;
+  transform: scale(0.95) translateY(20px);
+  display: flex;
+  pointer-events: none;
+}
+
+.beakWindow.active {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+  pointer-events: auto;
+}
+
+@media (min-width: 640px) {
+  .beakWindow {
+    transform-origin: bottom right;
+    bottom: 5rem;
+    right: 1rem;
+    top: auto;
+    left: auto;
+    border-width: 1px;
+    margin-bottom: 1rem;
+    width: 24rem;
+    height: 600px;
+    min-height: 200px;
+    max-height: calc(100% - 6rem);
+  }
+}
