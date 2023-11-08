@@ -35,12 +35,12 @@ jobs:
           registry-url: "https://registry.npmjs.org"
       - name: Install dependencies and build (core)
         run: |
-          cd src/core
+          cd packages/core
           yarn install
           yarn build
       - name: Publish to npm (core)
         run: npm publish --access public
-        working-directory: ./src/core
+        working-directory: ./packages/core
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
 
@@ -55,11 +55,11 @@ jobs:
           registry-url: "https://registry.npmjs.org"
       - name: Install dependencies and build (react)
         run: |
-          cd src/react
+          cd packages/react
           yarn install
           yarn build
       - name: Publish to npm (react)
         run: npm publish --access public
-        working-directory: ./src/react
+        working-directory: ./packages/react
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
