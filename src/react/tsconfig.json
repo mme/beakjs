@@ -14,11 +14,7 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": false,
-    "jsx": "react",
-    "baseUrl": ".",
-    "paths": {
-      "@beakjs/core": ["../../src/core"]
-    }
+    "jsx": "react"
   },
-  "include": ["../../src/react"]
+  "include": ["."]
 }

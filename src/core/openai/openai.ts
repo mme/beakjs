@@ -1,5 +1,4 @@
 import EventEmitter from "eventemitter3";
-import { getEncoding } from "js-tiktoken";
 import { jsonrepair } from "jsonrepair";
 import {
   OpenAIChatCompletionChunk,
@@ -215,9 +214,9 @@ export class OpenAI extends EventEmitter<OpenAIEvents> {
 
   public countTokens(message: Message): number {
     if (message.content) {
-      return countTokens(message.content);
+      return estimateTokens(message.content);
     } else if (message.functionCall) {
-      return countTokens(
+      return estimateTokens(
         JSON.stringify(functionCallToOpenAI(message.functionCall))
       );
     }
@@ -285,8 +284,8 @@ function functionsToOpenAIFormat(
   });
 }
 
-function countTokens(text: string): number {
-  return getEncoding("cl100k_base").encode(text).length;
+function estimateTokens(text: string): number {
+  return text.length / 3;
 }
 
 function countFunctionsTokens(functions: FunctionDefinition[]): number {
@@ -295,7 +294,7 @@ function countFunctionsTokens(functions: FunctionDefinition[]): number {
   }
   const openAIFunctions = functionsToOpenAIFormat(functions);
   const json = JSON.stringify(openAIFunctions);
-  return countTokens(json);
+  return estimateTokens(json);
 }
 
 function maxTokensForModel(model: OpenAIModel): number {

@@ -5,8 +5,8 @@ const versionFilePath = "./VERSION";
 const rootPackageJsonPath = "./package.json";
 const otherPackageJsonPaths = [
   rootPackageJsonPath,
-  "./packages/core/package.json",
-  "./packages/react/package.json",
+  "./src/core/package.json",
+  "./src/react/package.json",
 ];
 
 // This function reads the VERSION file and returns the version string
@@ -47,7 +47,10 @@ function updatePackageData(
   typesOfDependencies.forEach((depType) => {
     if (rootPackageJson[depType] && targetPackageJson[depType]) {
       Object.keys(targetPackageJson[depType]).forEach((dep) => {
-        if (rootPackageJson[depType][dep]) {
+        if (dep.startsWith("@beakjs/")) {
+          targetPackageJson[depType][dep] = newVersion;
+          hasChanged = true;
+        } else if (rootPackageJson[depType][dep]) {
           targetPackageJson[depType][dep] = rootPackageJson[depType][dep];
           hasChanged = true;
         }

@@ -15,17 +15,22 @@ jobs:
         with:
           node-version: "14"
           registry-url: "https://registry.npmjs.org"
-      - name: Install dependencies and build (core)
+      - name: Install dependencies
         run: |
           yarn install
-          yarn build
-        working-directory: ./packages/core
-      - name: Install dependencies and build (react)
+      - name: Build (core)
         run: |
-          yarn install
-          yarn build
-        working-directory: ./packages/react
-      - name: Install dependencies and build (root)
+          yarn workspace @beakjs/core build
+      - name: Build (react)
         run: |
-          yarn install
-          yarn build
+          yarn workspace @beakjs/react build
+      - name: Publish (core)
+        run: |
+          yarn workspace @beakjs/core publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Publish (react)
+        run: |
+          yarn workspace @beakjs/react publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

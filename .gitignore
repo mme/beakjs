@@ -7,3 +7,6 @@ Thumbs.db
 .cache
 
 TODO.md
+
+src/core/dist
+src/react/dist

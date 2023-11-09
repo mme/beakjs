@@ -1,11 +1,10 @@
 {
   "name": "beakjs",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
     "eventemitter3": "^5.0.1",
-    "js-tiktoken": "^1.0.7",
     "jsonrepair": "^3.2.4",
     "react-textarea-autosize": "^8.4.1",
     "uuid": "^9.0.1"
@@ -54,5 +53,10 @@
   },
   "files": [
     "dist/**/*"
+  ],
+  "private": true,
+  "workspaces": [
+    "src/core",
+    "src/react"
   ]
 }

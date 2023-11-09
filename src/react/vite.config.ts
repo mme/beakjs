@@ -1,16 +1,10 @@
 // vite.config.ts
 import { defineConfig } from "vite";
-import path from "path";
 
 export default defineConfig({
-  resolve: {
-    alias: {
-      "@beakjs/core": path.resolve(__dirname, "../../src/core"),
-    },
-  },
   build: {
     lib: {
-      entry: "../../src/react/index.tsx",
+      entry: "index.ts",
       name: "BeakJS",
       fileName: (format) => `beakjs.${format}.js`,
     },

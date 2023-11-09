@@ -1,7 +1,7 @@
 {
   "name": "@beakjs/core",
-  "version": "0.0.3",
-  "description": "Core library for BeakJS",
+  "version": "0.0.4",
+  "description": "BeakJS core library",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
@@ -13,7 +13,6 @@
   ],
   "dependencies": {
     "eventemitter3": "^5.0.1",
-    "js-tiktoken": "^1.0.7",
     "jsonrepair": "^3.2.4",
     "uuid": "^9.0.1"
   },
