@@ -1,0 +1,9 @@
+{
+  "files.exclude": {
+    "**/.cache": true,
+    "**/node_modules": true,
+    ".placeholder": true,
+    "src/core/dist": true,
+    "src/react/dist": true
+  }
+}
