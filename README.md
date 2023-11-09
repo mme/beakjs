@@ -69,7 +69,7 @@ const MyApp = () => {
 };
 ```
 
-Note that the function will automatically be made available to the copilot when your component is mounted. This is a powerful concept, ensuring that the copilot is always in sync with the current context of your app, providing relevant assistance to the user. But it gets even better:
+Note that the function will automatically be made available to the copilot when your component is mounted. This is a powerful concept, ensuring that the copilot is always in sync with the current context of your app, providing relevant assistance to the user.
 
 ### Let the Assistant Know What's Happening On Screen
 
