@@ -1,6 +1,6 @@
-# Beak.js ![npm (scoped)](https://img.shields.io/npm/v/%40beakjs/react)
+# 🐦 Beak.js ![npm (scoped)](https://img.shields.io/npm/v/%40beakjs/react)
 
-Beak.js is a powerful and flexible React library designed to integrate conversational assistants into your web applications.
+Beak.js is a powerful and flexible React library designed to integrate conversational copilots into your web applications.
 
 **Key Features:**
 
