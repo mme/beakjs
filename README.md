@@ -75,21 +75,21 @@ Note that the function is available to the assistant when your component is moun
 
 ### Let the Assistant Know What's Happening On Screen
 
-You can easily let the assistant know what it currently on screen by using `useBeakContext`:
+You can easily let the assistant know what it currently on screen by using `useBeakInfo`:
 
 ```jsx
-import { useBeakContext } from "@beakjs/react";
+import { useBeakInfo } from "@beakjs/react";
 
 const MyApp = () => {
   const [message, setMessage] = useState("Hello World!");
 
-  useBeakContext("current message", message);
+  useBeakInfo("current message", message);
 
   // ...
 };
 ```
 
-By using `useBeakFunction` together with `useBeakContext`, your assistant can see what's happening on the screen and take action within your app depending on the current context.
+By using `useBeakFunction` together with `useBeakInfo`, your assistant can see what's happening on the screen and take action within your app depending on the current context.
 
 ## Issues
 

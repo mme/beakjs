@@ -19,9 +19,9 @@ export function useBeakFunction(definition: FunctionDefinition) {
   }, [definition]);
 }
 
-export function useBeakContext(data: any): void;
-export function useBeakContext(description: string, data: any): void;
-export function useBeakContext(descriptionOrData: any, data?: any): void {
+export function useBeakInfo(data: any): void;
+export function useBeakInfo(description: string, data: any): void;
+export function useBeakInfo(descriptionOrData: any, data?: any): void {
   const context = useContext(CopilotContext);
 
   if (!context) {

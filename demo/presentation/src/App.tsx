@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Copilot, useBeakContext, useBeakFunction } from "@beakjs/react";
+import { Copilot, useBeakInfo, useBeakFunction } from "@beakjs/react";
 
 import "./App.css";
 import { DebugLogger } from "@beakjs/core";
@@ -30,7 +30,7 @@ const Presentation = () => {
     backgroundImage: "none",
   });
 
-  useBeakContext("current slide", state);
+  useBeakInfo("current slide", state);
 
   useBeakFunction({
     name: "presentSlide",
