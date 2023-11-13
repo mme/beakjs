@@ -12,7 +12,7 @@ Beak.js is a powerful and flexible React library designed to integrate conversat
 
 ### Installation
 
-First up, you need to add Beak.js to your project:
+First up, add Beak.js to your project:
 
 ```bash
 npm install @beakjs/react --save
@@ -21,7 +21,7 @@ npm install @beakjs/react --save
 yarn add @beakjs/react
 ```
 
-### Set Up the Chat Assistant
+### Setup
 
 Next, wrap your app in the `Copilot` component:
 
@@ -40,7 +40,9 @@ const App = () => (
 
 Now, you've got a chat box ready to help out in the bottom right corner of your website. Give it a try!
 
-### Making the Assistant Work with Your App
+**Note:** Don't expose your API key in public-facing apps. We will be adding a solution for securely using your API key soon.
+
+### Making the Beak.js Work with Your App
 
 You can let the assistant carry out tasks in your app by setting up functions with `useBeakFunction`:
 
@@ -89,6 +91,12 @@ const MyApp = () => {
 
 By using `useBeakFunction` together with `useBeakContext`, your copilot can see what's happening on the screen and take action within your app depending on the current context.
 
-### A Word of Warning About API Keys
+## Issues
 
-:warning: Exposing the key in public-facing apps can pose security risks. We're actively developing a solution for this.
+Feel free to submit issues and enhancement requests.
+
+## License
+
+MIT
+
+Copyright (c) 2023, Markus Ecker
