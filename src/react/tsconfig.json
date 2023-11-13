@@ -16,5 +16,6 @@
     "noEmit": false,
     "jsx": "react"
   },
-  "include": ["."]
+  "include": ["."],
+  "exclude": ["vite.config.ts"]
 }

@@ -18,13 +18,7 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true,
-
-    /* Path Mapping */
-    "baseUrl": ".",
-    "paths": {
-      "@beakjs/*": ["../../src/*"]
-    }
+    "noFallthroughCasesInSwitch": true
   },
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]

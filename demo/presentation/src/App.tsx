@@ -26,8 +26,7 @@ const App = () => {
 
 const Presentation = () => {
   const [state, setState] = useState({
-    message:
-      "Hello World! Hello World! Hello World! Hello World! Hello World! Hello World! Hello World! Hello World! Hello World! Hello World! Hello World! Hello World! Hello World! Hello World!",
+    message: "Hello World!",
     backgroundImage: "none",
   });
 
