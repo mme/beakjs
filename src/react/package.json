@@ -6,8 +6,7 @@
   "module": "dist/beakjs.es.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "build:types": "tsc --declaration --emitDeclarationOnly --outDir dist",
-    "build": "vite build && yarn build:types",
+    "build": "vite build",
     "prepublishOnly": "yarn build"
   },
   "files": [
@@ -26,6 +25,7 @@
     "typescript": "^5.0.4",
     "vite": "^4.3.5",
     "vite-plugin-css-injected-by-js": "^3.3.0",
+    "vite-plugin-dts": "^3.6.3",
     "vite-tsconfig-paths": "^4.2.0"
   },
   "peerDependencies": {
