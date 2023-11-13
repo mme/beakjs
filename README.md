@@ -1,10 +1,10 @@
 # 🐦 Beak.js ![npm (scoped)](https://img.shields.io/npm/v/%40beakjs/react)
 
-Beak.js is a powerful and flexible React library designed to integrate conversational copilots into your web applications.
+Beak.js lets you integrate custom conversational assistants into your React applications.
 
 **Key Features:**
 
-- **Easy to Use** - Beak.js integrates with your existing React app in just a few lines of code.
+- **Easy to Use** - Integrates with your existing React app in just a few lines of code.
 - **Customizable** - Customize the look and feel to fit your app.
 - **Open Source** - Beak.js is open source and free to use.
 
@@ -38,11 +38,11 @@ const App = () => (
 );
 ```
 
-Now, you've got a chat box ready to help out in the bottom right corner of your website. Give it a try!
+Now, you've got a chat window ready in the bottom right corner of your website. Give it a try!
 
 **Note:** Don't expose your API key in public-facing apps. We will be adding a solution for securely using your API key soon.
 
-### Making Beak.js Work with Your App
+### Making Beak.js work with your app
 
 You can let the assistant carry out tasks in your app by setting up functions with `useBeakFunction`:
 
@@ -71,11 +71,11 @@ const MyApp = () => {
 };
 ```
 
-Note that the function will automatically be made available to the copilot when your component is mounted. This is a powerful concept, ensuring that the copilot is always in sync with the current context of your app, providing relevant assistance to the user.
+Note that the function is available to the assistant when your component is mounted. This is a powerful concept, ensuring that the assistant will be able to call functions relevant to the current context of your app.
 
 ### Let the Assistant Know What's Happening On Screen
 
-You can easily let the copilot know what it currently on screen by using `useBeakContext`:
+You can easily let the assistant know what it currently on screen by using `useBeakContext`:
 
 ```jsx
 import { useBeakContext } from "@beakjs/react";
@@ -89,7 +89,7 @@ const MyApp = () => {
 };
 ```
 
-By using `useBeakFunction` together with `useBeakContext`, your copilot can see what's happening on the screen and take action within your app depending on the current context.
+By using `useBeakFunction` together with `useBeakContext`, your assistant can see what's happening on the screen and take action within your app depending on the current context.
 
 ## Issues
 
