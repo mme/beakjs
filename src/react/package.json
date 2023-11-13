@@ -25,6 +25,7 @@
     "rollup-plugin-visualizer": "^5.9.2",
     "typescript": "^5.0.4",
     "vite": "^4.3.5",
+    "vite-plugin-css-injected-by-js": "^3.3.0",
     "vite-tsconfig-paths": "^4.2.0"
   },
   "peerDependencies": {
