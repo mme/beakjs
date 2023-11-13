@@ -77,6 +77,7 @@ export const Slide = ({ message, backgroundImage }: SlideProps) => {
         backgroundImage,
         inset: 0,
         display: "flex",
+        flex: 1,
         fontFamily: "sans-serif",
         justifyContent: "center",
         alignItems: "center",
