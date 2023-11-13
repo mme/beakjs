@@ -42,7 +42,7 @@ Now, you've got a chat box ready to help out in the bottom right corner of your 
 
 **Note:** Don't expose your API key in public-facing apps. We will be adding a solution for securely using your API key soon.
 
-### Making the Beak.js Work with Your App
+### Making Beak.js Work with Your App
 
 You can let the assistant carry out tasks in your app by setting up functions with `useBeakFunction`:
 
