@@ -7,7 +7,7 @@ export function useBeakFunction(definition: FunctionDefinition) {
   const beak = context.beak;
   if (beak == null) {
     throw new Error(
-      "Beak not found in context. Did you forget to wrap your app in a <Copilot> component?"
+      "Beak not found in context. Did you forget to wrap your app in a <Beak> component?"
     );
   }
   useEffect(() => {
@@ -32,7 +32,7 @@ export function useBeakInfo(descriptionOrData: any, data?: any): void {
 
   if (beak == null) {
     throw new Error(
-      "Beak not found in context. Did you forget to wrap your app in a <Copilot> component?"
+      "Beak not found in context. Did you forget to wrap your app in a <Beak> component?"
     );
   }
 
