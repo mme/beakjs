@@ -4,8 +4,8 @@ Beak.js lets you integrate custom conversational assistants into your React appl
 
 **Key Features:**
 
+- **Built-in UI** - Comes with a beautiful, fully customizable chat window.
 - **Easy to Use** - Integrates with your existing React app in just a few lines of code.
-- **Customizable** - Customize the look and feel to fit your app.
 - **Open Source** - Beak.js is open source and free to use.
 
 ## Getting Started
@@ -72,7 +72,7 @@ const MyApp = () => {
 };
 ```
 
-Note that the function is available to the assistant when your component is mounted. This is a powerful concept, ensuring that the assistant will be able to call functions relevant to the current context of your app.
+Note that functions become available to the assistant as soon as their respective component is mounted. This is a powerful concept, ensuring that the assistant will be able to call functions relevant to the current context of your app.
 
 ### Let the Assistant Know What's Happening On Screen
 
