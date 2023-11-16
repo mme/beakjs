@@ -5,8 +5,8 @@ const versionFilePath = "./VERSION";
 const rootPackageJsonPath = "./package.json";
 const otherPackageJsonPaths = [
   rootPackageJsonPath,
-  "./src/core/package.json",
-  "./src/react/package.json",
+  "./packages/core/package.json",
+  "./packages/react/package.json",
 ];
 
 // This function reads the VERSION file and returns the version string

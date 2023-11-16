@@ -1,6 +1,6 @@
 {
   "name": "@beakjs/react",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "React library for BeakJS",
   "main": "dist/beakjs.umd.js",
   "module": "dist/beakjs.es.js",
@@ -13,7 +13,7 @@
     "dist/**/*"
   ],
   "dependencies": {
-    "@beakjs/core": "0.0.4",
+    "@beakjs/core": "0.0.5",
     "react-textarea-autosize": "^8.4.1"
   },
   "devDependencies": {
