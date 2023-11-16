@@ -1,15 +1,13 @@
-import React, { useContext, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import TextareaAutosize from "react-textarea-autosize";
-import { CopilotContext } from "./Copilot";
+import { InputProps } from "./props";
+import { useBeakContext } from "./Beak";
+import { useBeakThemeContext } from "./Theme";
 import "../css/Input.css";
 
-interface InputProps {
-  inProgress: boolean;
-  onSend: (text: string) => void;
-}
-
 export const Input: React.FC<InputProps> = ({ inProgress, onSend }) => {
-  const context = useContext(CopilotContext);
+  const context = useBeakContext();
+  const themeContext = useBeakThemeContext();
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   const handleDivClick = (event: React.MouseEvent<HTMLDivElement>) => {
@@ -28,7 +26,9 @@ export const Input: React.FC<InputProps> = ({ inProgress, onSend }) => {
     textareaRef.current?.focus();
   };
 
-  const icon = inProgress ? context.icons.activityIcon : context.icons.sendIcon;
+  const icon = inProgress
+    ? themeContext.icons.activityIcon
+    : themeContext.icons.sendIcon;
   const disabled = inProgress || text.length === 0;
 
   return (
@@ -38,7 +38,7 @@ export const Input: React.FC<InputProps> = ({ inProgress, onSend }) => {
       </button>
       <TextareaAutosize
         ref={textareaRef}
-        placeholder={context.messages.placeholder}
+        placeholder={context.labels.placeholder}
         autoFocus={true}
         maxRows={5}
         value={text}

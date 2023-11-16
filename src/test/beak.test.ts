@@ -1,4 +1,4 @@
-import { Beak } from "../core/beak";
+import { BeakCore } from "../core/beak";
 import { mockContentResponses, mockFunctionResponse } from "./utils";
 
 global.fetch = jest.fn();
@@ -23,7 +23,7 @@ describe("Beak", () => {
     });
 
     const openAIApiKey = "sk-xyz";
-    const beak = new Beak({ openAIApiKey, openAIModel });
+    const beak = new BeakCore({ openAIApiKey, openAIModel });
 
     const onChangeMock = jest.fn();
     const onErrorMock = jest.fn();
@@ -86,7 +86,7 @@ describe("Beak", () => {
     });
 
     const openAIModel = "gpt-3.5-turbo";
-    const beak = new Beak({ openAIApiKey, openAIModel });
+    const beak = new BeakCore({ openAIApiKey, openAIModel });
     beak.addFunction({
       name: "sayHello",
       parameters: {

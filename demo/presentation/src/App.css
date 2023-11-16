@@ -1,0 +1,22 @@
+.slide {
+  display: flex;
+  inset: 0;
+  display: flex;
+  flex: 1;
+  inset: 0;
+  font-family: sans-serif;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  padding: 5rem;
+  background-repeat: no-repeat;
+  background-size: cover;
+  text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+}
+
+@media (min-width: 640px) {
+  .slide {
+    font-size: 5rem;
+    padding: 10rem;
+  }
+}

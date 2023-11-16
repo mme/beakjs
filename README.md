@@ -23,18 +23,19 @@ yarn add @beakjs/react
 
 ### Setup
 
-Next, wrap your app in the `Copilot` component:
+Next, wrap your app in the `Beak` component and add the assistant window:
 
 ```jsx
-import { Copilot } from "@beakjs/react";
+import { Beak } from "@beakjs/react";
 
 const App = () => (
-  <Copilot
+  <Beak
     openAIApiKey="sk-..."
     instructions="Assistant is running in a web app and helps the user with XYZ."
   >
     <MyApp />
-  </Copilot>
+    <AssistantWindow />
+  </Beak>
 );
 ```
 

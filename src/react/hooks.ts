@@ -1,9 +1,9 @@
-import { useContext, useEffect } from "react";
+import { useEffect } from "react";
 import { FunctionDefinition } from "@beakjs/core";
-import { CopilotContext } from "./Copilot";
+import { useBeakContext } from "./Beak";
 
 export function useBeakFunction(definition: FunctionDefinition) {
-  const context = useContext(CopilotContext);
+  const context = useBeakContext();
   const beak = context.beak;
   if (beak == null) {
     throw new Error(
@@ -22,7 +22,7 @@ export function useBeakFunction(definition: FunctionDefinition) {
 export function useBeakInfo(data: any): void;
 export function useBeakInfo(description: string, data: any): void;
 export function useBeakInfo(descriptionOrData: any, data?: any): void {
-  const context = useContext(CopilotContext);
+  const context = useBeakContext();
 
   if (!context) {
     throw new Error("Context is not defined.");
@@ -40,10 +40,10 @@ export function useBeakInfo(descriptionOrData: any, data?: any): void {
   const actualData = data ?? descriptionOrData;
 
   useEffect(() => {
-    const id = beak.addContext(actualData, actualDescription);
+    const id = beak.addInfo(actualData, actualDescription);
 
     return () => {
-      beak.removeContext(id);
+      beak.removeInfo(id);
     };
   }, [beak, actualDescription, actualData]);
 }

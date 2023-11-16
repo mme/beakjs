@@ -8,7 +8,6 @@
   --beak-separator-color: rgba(0, 0, 0, 0.08);
   --beak-scrollbar-color: rgba(0, 0, 0, 0.2);
 
-  /* The background color of the open/close button */
   --beak-button-background-color: var(--beak-primary-color);
 
   /* The color of the icon in the open/close button */
@@ -90,8 +89,8 @@
   );
 }
 
-.beak-dark-theme,
-.beak-dark-theme * {
+.beakColorSchemeDark,
+.beakColorSchemeDark * {
   color-scheme: light dark;
   --beak-primary-color: var(--beak-dark-primary-color);
   --beak-contrast-color: var(--beak-dark-contrast-color);
@@ -127,8 +126,8 @@
 }
 
 @media (prefers-color-scheme: dark) {
-  .beak-dark-theme,
-  .beak-dark-theme * {
+  .beakColorSchemeAuto,
+  .beakColorSchemeAuto * {
     color-scheme: light dark;
     --beak-primary-color: var(--beak-dark-primary-color);
     --beak-contrast-color: var(--beak-dark-contrast-color);

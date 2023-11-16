@@ -1,26 +1,31 @@
 import { useState } from "react";
-import { Copilot, useBeakInfo, useBeakFunction } from "@beakjs/react";
+import {
+  Beak,
+  AssistantWindow,
+  useBeakInfo,
+  useBeakFunction,
+} from "@beakjs/react";
 
-import "./App.css";
 import { DebugLogger } from "@beakjs/core";
+import "./App.css";
 
 const App = () => {
   const openAIApiKey = import.meta.env.VITE_OPENAI_API_KEY;
   const debugLogger = new DebugLogger(["chat-api"]);
   return (
-    <Copilot
+    <Beak
       openAIApiKey={openAIApiKey}
       instructions="Assistant is running in a web app and gives presentations on any topic."
-      messages={{
+      labels={{
         initial: "Hi you! 👋 I can give you a presentation on any topic.",
         thinking: "Presenting Slide...",
         done: "✅ Slide presented.",
       }}
       debugLogger={debugLogger}
-      defaultOpen={false}
     >
       <Presentation />
-    </Copilot>
+      <AssistantWindow />
+    </Beak>
   );
 };
 
@@ -73,19 +78,20 @@ export const Slide = ({ message, backgroundImage }: SlideProps) => {
   }
   return (
     <div
+      className="slide"
       style={{
         backgroundImage,
-        inset: 0,
-        display: "flex",
-        flex: 1,
-        fontFamily: "sans-serif",
-        justifyContent: "center",
-        alignItems: "center",
-        fontSize: "5rem",
-        padding: "10rem",
-        backgroundRepeat: "no-repeat",
-        backgroundSize: "cover",
-        textShadow: "-1px 0 white, 0 1px white, 1px 0 white, 0 -1px white",
+        // inset: 0,
+        // display: "flex",
+        // flex: 1,
+        // fontFamily: "sans-serif",
+        // justifyContent: "center",
+        // alignItems: "center",
+        // fontSize: "5rem",
+        // padding: "5rem",
+        // backgroundRepeat: "no-repeat",
+        // backgroundSize: "cover",
+        // textShadow: "-1px 0 white, 0 1px white, 1px 0 white, 0 -1px white",
       }}
     >
       {message}

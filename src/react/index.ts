@@ -1,3 +1,4 @@
 import "../css/index.css";
-export { Copilot } from "./Copilot";
+export { AssistantWindow } from "./Assistant";
 export { useBeakFunction, useBeakInfo } from "./hooks";
+export { Beak } from "./Beak";

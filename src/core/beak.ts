@@ -38,19 +38,19 @@ interface BeakEvents {
   end: () => void;
 }
 
-interface BeakContext {
+interface BeakInfo {
   description: string;
   data: any;
 }
 
-export class Beak extends EventEmitter<BeakEvents> {
+export class BeakCore extends EventEmitter<BeakEvents> {
   public _messages: Message[] = [];
 
   private instructionsMessage: Message;
   private formattingInstructionsMessage?: Message;
   public configuration: BeakConfiguration;
   public functions: Record<string, FunctionDefinition> = {};
-  public context: Record<string, BeakContext> = {};
+  public info: Record<string, BeakInfo> = {};
   private debug: DebugLogger;
 
   constructor(configuration: BeakConfiguration) {
@@ -90,26 +90,26 @@ export class Beak extends EventEmitter<BeakEvents> {
     }
   }
 
-  public addContext(data: any, description: string = "data"): string {
+  public addInfo(data: any, description: string = "data"): string {
     const id = uuidv4();
-    this.context[id] = { description, data };
+    this.info[id] = { description, data };
     return id;
   }
 
-  public removeContext(id: string) {
-    delete this.context[id];
+  public removeInfo(id: string) {
+    delete this.info[id];
   }
 
-  private contextMessage(): Message | undefined {
-    const ctx = Object.values(this.context);
-    if (ctx.length == 0) {
+  private infoMessage(): Message | undefined {
+    const info = Object.values(this.info);
+    if (info.length == 0) {
       return undefined;
     }
-    const ctxStrings = ctx.map(
+    const infoStrings = info.map(
       (c) => c.description + ": " + JSON.stringify(c.data)
     );
-    ctxStrings.sort();
-    const ctxString = ctxStrings.join("\n");
+    infoStrings.sort();
+    const ctxString = infoStrings.join("\n");
     return new Message({
       role: "system",
       content:
@@ -154,7 +154,7 @@ export class Beak extends EventEmitter<BeakEvents> {
 
       const client = this.newClient();
 
-      const contextMessage = this.contextMessage();
+      const contextMessage = this.infoMessage();
       let newMessages: Message[] = [];
       try {
         newMessages = await this.runChatCompletionAsync(client, {

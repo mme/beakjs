@@ -30,11 +30,12 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "yarn workspace @beakjs/core build && yarn workspace @beakjs/react build",
     "prepublishOnly": "yarn build",
     "serve": "vite preview",
     "test": "jest",
-    "sync-versions": "ts-node scripts/sync-versions.ts"
+    "sync-versions": "ts-node scripts/sync-versions.ts",
+    "clean": "rm -rf dist && rm -rf src/react/dist && rm -rf src/core/dist"
   },
   "jest": {
     "testTimeout": 60000,

@@ -1,19 +1,18 @@
-import React, { useContext } from "react";
+import React from "react";
+import { HeaderProps } from "./props";
 import "../css/Header.css";
-import { CopilotContext } from "./Copilot";
-
-interface HeaderProps {
-  setOpen: (open: boolean) => void;
-}
+import { useBeakThemeContext } from "./Theme";
+import { useBeakContext } from "./Beak";
 
 export const Header: React.FC<HeaderProps> = ({ setOpen }) => {
-  const context = useContext(CopilotContext);
+  const context = useBeakContext();
+  const themeContext = useBeakThemeContext();
 
   return (
     <div className="beakHeader">
-      <div>{context.messages.title}</div>
+      <div>{context.labels.title}</div>
       <button onClick={() => setOpen(false)} aria-label="Close">
-        {context.icons.headerCloseIcon}
+        {themeContext.icons.headerCloseIcon}
       </button>
     </div>
   );

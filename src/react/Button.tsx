@@ -1,18 +1,14 @@
 import React from "react";
+import { ButtonProps } from "./props";
 import "../css/Button.css";
-import { CopilotContext } from "./Copilot";
+import { useBeakThemeContext } from "./Theme";
 
-interface ButtonProps {
-  open: boolean;
-  onClick: () => void;
-}
-
-export const Button: React.FC<ButtonProps> = ({ open, onClick }) => {
-  const context = React.useContext(CopilotContext);
+export const Button: React.FC<ButtonProps> = ({ open, setOpen }) => {
+  const context = useBeakThemeContext();
   // To ensure that the mouse handler fires even when the button is scaled down
   // we wrap the button in a div and attach the handler to the div
   return (
-    <div onClick={onClick}>
+    <div onClick={() => setOpen(!open)}>
       <button
         className={`beakButton ${open ? "open" : ""}`}
         aria-label={open ? "Close Chat" : "Open Chat"}

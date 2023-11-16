@@ -1,26 +1,3 @@
-.beakCopilot {
-  position: fixed;
-  bottom: 1rem;
-  right: 1rem;
-  z-index: 30;
-  line-height: 1.5;
-  -webkit-text-size-adjust: 100%;
-  -moz-tab-size: 4;
-  -o-tab-size: 4;
-  tab-size: 4;
-  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
-    "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif,
-    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  font-feature-settings: normal;
-  font-variation-settings: normal;
-  touch-action: manipulation;
-}
-
-.beakCopilot svg {
-  display: inline-block;
-  vertical-align: middle;
-}
-
 .beakWindow {
   position: fixed;
   inset: 0px;
@@ -37,7 +14,7 @@
   pointer-events: none;
 }
 
-.beakWindow.active {
+.beakWindow.open {
   opacity: 1;
   transform: scale(1) translateY(0);
   pointer-events: auto;
