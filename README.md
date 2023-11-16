@@ -1,4 +1,4 @@
-# 🐦 Beak.js [![X (formerly Twitter) Follow](https://img.shields.io/twitter/follow/mme_xyz?style=flat&logo=x)](https://twitter.com/mme_xyz) ![npm (scoped)](https://img.shields.io/npm/v/%40beakjs/react)
+# 🐦 Beak.js [![X (formerly Twitter) Follow](https://img.shields.io/twitter/follow/mme_xyz?style=flat&logo=x)](https://twitter.com/mme_xyz) [![npm (scoped)](https://img.shields.io/npm/v/%40beakjs/react)](https://www.npmjs.com/package/@beakjs/react)
 
 Beak.js lets you integrate custom conversational assistants into your React applications.
 
