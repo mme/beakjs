@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { MessagesProps } from "./props";
 import { useBeakContext } from "./Beak";
 import { useBeakThemeContext } from "./Theme";
-import "../css/Messages.css";
+import "../../css/Messages.css";
 
 export const Messages: React.FC<MessagesProps> = ({ messages }) => {
   const context = useBeakContext();

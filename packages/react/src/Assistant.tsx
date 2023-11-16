@@ -14,7 +14,7 @@ import { Button as DefaultButton } from "./Button";
 import { Header as DefaultHeader } from "./Header";
 import { Messages as DefaultMessages } from "./Messages";
 import { Input as DefaultInput } from "./Input";
-import "../css/Assistant.css";
+import "../../css/Assistant.css";
 
 interface AssistantWindowProps {
   defaultOpen?: boolean;

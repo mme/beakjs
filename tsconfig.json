@@ -16,9 +16,9 @@
     "jsx": "react",
     "baseUrl": ".",
     "paths": {
-      "@beakjs/core": ["./src/core"]
+      "@beakjs/core": ["packages/core"]
     }
   },
-  "include": ["src"],
-  "exclude": ["src/test"]
+  "include": ["packages"],
+  "exclude": ["packages/test"]
 }

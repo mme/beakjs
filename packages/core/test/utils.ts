@@ -1,13 +1,9 @@
-// import { ChatCompletion } from "../lib/openai/chat";
-// import { OpenAIFunction } from "../lib/openai/types";
-// import { IMessage } from "../lib/types";
-
 export function mockContentResponses(
   sentence: string,
   model: string
 ): string[] {
-  const responses = [];
-  const chunks = [];
+  const responses: any[] = [];
+  const chunks: string[] = [];
   let start = 0;
   const chunkSize = 4;
 
@@ -55,43 +51,13 @@ function createJsonString(
   return `data: ${JSON.stringify(jsonString)}\n`;
 }
 
-// export async function collectChatCompletionData(params: {
-//   chatCompletion: ChatCompletion;
-//   model: string;
-//   messages: IMessage[];
-//   functions?: OpenAIFunction[];
-//   functionCall?: "none" | "auto";
-//   temperature?: number;
-// }): Promise<any[]> {
-//   const results: any[] = [];
-
-//   return new Promise((resolve, reject) => {
-//     params.chatCompletion.on("data", (data) => {
-//       results.push({ type: "data", value: data });
-//     });
-
-//     params.chatCompletion.on("error", (error) => {
-//       results.push({ type: "error", value: error });
-//       resolve(results);
-//     });
-
-//     params.chatCompletion.on("end", () => {
-//       resolve(results);
-//     });
-
-//     params.chatCompletion.fetchChatCompletion(params).catch((err) => {
-//       reject(err);
-//     });
-//   });
-// }
-
 export function mockFunctionResponse(
   functionName: string,
   functionArgs: any,
   model: string
 ): string[] {
   const serializedArgs = JSON.stringify(functionArgs);
-  const chunks = [];
+  const chunks: any[] = [];
   let start = 0;
   const chunkSize = 4;
 

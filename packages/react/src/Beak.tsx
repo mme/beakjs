@@ -1,6 +1,5 @@
 import React, { useMemo } from "react";
-import { BeakCore, OpenAIModel } from "@beakjs/core";
-import { DebugLogger } from "@beakjs/core";
+import { BeakCore, OpenAIModel, DebugLogger } from "@beakjs/core";
 
 const DEFAULT_DEBUG_LOGGER = new DebugLogger([]);
 

@@ -8,5 +8,5 @@ Thumbs.db
 
 TODO.md
 
-src/core/dist
-src/react/dist
+packages/core/dist
+packages/react/dist

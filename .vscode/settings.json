@@ -3,7 +3,7 @@
     "**/.cache": true,
     "**/node_modules": true,
     ".placeholder": true,
-    "src/core/dist": true,
-    "src/react/dist": true
+    "packages/core/dist": true,
+    "packages/react/dist": true
   }
 }

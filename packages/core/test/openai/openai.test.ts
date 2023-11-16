@@ -1,6 +1,6 @@
 import { mockContentResponses, mockFunctionResponse } from "../utils";
-import { OpenAI } from "../../core/openai/openai";
-import { QueryChatCompletionParams, Message } from "../../core/types";
+import { OpenAI } from "../../src/openai/openai";
+import { QueryChatCompletionParams, Message } from "../../src/types";
 
 global.fetch = jest.fn();
 
@@ -38,7 +38,7 @@ describe("OpenAI", () => {
     openai.on("end", onEndMock);
 
     await openai.queryChatCompletion({
-      messages: [new Message("user", "Hello!")],
+      messages: [new Message({ role: "user", content: "Hello!" })],
     });
 
     expect(onContentMock).toHaveBeenCalledTimes(3);
@@ -94,7 +94,9 @@ describe("OpenAI", () => {
     openai.on("end", onEndMock);
 
     await openai.queryChatCompletion({
-      messages: [new Message("user", "Say hello to the world!")],
+      messages: [
+        new Message({ role: "user", content: "Say hello to the world!" }),
+      ],
       functions: [
         {
           name: "sayHello",
@@ -170,7 +172,7 @@ describe("OpenAI", () => {
 
     const content = "Hello!";
     await openai.queryChatCompletion({
-      messages: [new Message("user", content)],
+      messages: [new Message({ role: "user", content })],
       functions: [
         {
           name: "sayHello",
@@ -254,7 +256,7 @@ describe("OpenAI", () => {
     openai.on("end", onEndMock);
 
     await openai.queryChatCompletion({
-      messages: [new Message("user", "Hello!")],
+      messages: [new Message({ role: "user", content: "Hello!" })],
     });
 
     expect(onContentMock).not.toHaveBeenCalled();
@@ -265,7 +267,9 @@ describe("OpenAI", () => {
 
   it("does not remove messages when enough tokens are available", async () => {
     let openai = new OpenAI({ apiKey: "sk-xyz", model: "gpt-3.5-turbo" });
-    const messages: Message[] = [new Message("user", "Hello world!")];
+    const messages: Message[] = [
+      new Message({ role: "user", content: "Hello world!" }),
+    ];
     let params: QueryChatCompletionParams = {
       messages: messages,
       maxTokens: 3,
@@ -278,8 +282,8 @@ describe("OpenAI", () => {
   it("does not remove messages when enough tokens are available", async () => {
     let openai = new OpenAI({ apiKey: "sk-xyz", model: "gpt-3.5-turbo" });
     const messages: Message[] = [
-      new Message("user", "Hello world!"),
-      new Message("user", "Hallo welt!"),
+      new Message({ role: "user", content: "Hello world!" }),
+      new Message({ role: "user", content: "Hallo welt!" }),
     ];
     let params: QueryChatCompletionParams = {
       messages: messages,
@@ -293,8 +297,8 @@ describe("OpenAI", () => {
   it("does remove messages when too few tokens are available", async () => {
     let openai = new OpenAI({ apiKey: "sk-xyz", model: "gpt-3.5-turbo" });
     const messages: Message[] = [
-      new Message("user", "Hello world!"),
-      new Message("user", "Hallo welt!"),
+      new Message({ role: "user", content: "Hello world!" }),
+      new Message({ role: "user", content: "Hallo welt!" }),
     ];
     let params: QueryChatCompletionParams = {
       messages: messages,
@@ -313,9 +317,9 @@ describe("OpenAI", () => {
   it("does not remove system messages", async () => {
     let openai = new OpenAI({ apiKey: "sk-xyz", model: "gpt-3.5-turbo" });
     const messages: Message[] = [
-      new Message("system", "Hola mundo!"),
-      new Message("user", "Hello world!"),
-      new Message("user", "Hallo welt!"),
+      new Message({ role: "system", content: "Hola mundo!" }),
+      new Message({ role: "user", content: "Hello world!" }),
+      new Message({ role: "user", content: "Hallo welt!" }),
     ];
     let params: QueryChatCompletionParams = {
       messages: messages,

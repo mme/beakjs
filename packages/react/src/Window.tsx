@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect } from "react";
 import { WindowProps } from "./props";
-import "../css/Window.css";
+import "../../css/Window.css";
 
 export const Window = ({
   open,

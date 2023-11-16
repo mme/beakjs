@@ -3,7 +3,7 @@ import TextareaAutosize from "react-textarea-autosize";
 import { InputProps } from "./props";
 import { useBeakContext } from "./Beak";
 import { useBeakThemeContext } from "./Theme";
-import "../css/Input.css";
+import "../../css/Input.css";
 
 export const Input: React.FC<InputProps> = ({ inProgress, onSend }) => {
   const context = useBeakContext();

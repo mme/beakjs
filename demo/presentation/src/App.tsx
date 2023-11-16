@@ -4,7 +4,7 @@ import {
   AssistantWindow,
   useBeakInfo,
   useBeakFunction,
-} from "@beakjs/react";
+} from "../../../packages/react/src";
 
 import { DebugLogger } from "@beakjs/core";
 import "./App.css";
@@ -81,17 +81,6 @@ export const Slide = ({ message, backgroundImage }: SlideProps) => {
       className="slide"
       style={{
         backgroundImage,
-        // inset: 0,
-        // display: "flex",
-        // flex: 1,
-        // fontFamily: "sans-serif",
-        // justifyContent: "center",
-        // alignItems: "center",
-        // fontSize: "5rem",
-        // padding: "5rem",
-        // backgroundRepeat: "no-repeat",
-        // backgroundSize: "cover",
-        // textShadow: "-1px 0 white, 0 1px white, 1px 0 white, 0 -1px white",
       }}
     >
       {message}

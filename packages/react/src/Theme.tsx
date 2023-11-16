@@ -1,6 +1,6 @@
 import React from "react";
 import * as DefaultIcons from "./Icons";
-import "../css/Theme.css";
+import "../../css/Theme.css";
 
 export type ColorScheme = "auto" | "light" | "dark";
 

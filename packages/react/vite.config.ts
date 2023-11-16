@@ -7,7 +7,7 @@ export default defineConfig({
   plugins: [cssInjectedByJsPlugin(), dts()],
   build: {
     lib: {
-      entry: "index.ts",
+      entry: "src/index.ts",
       name: "BeakJS",
       fileName: (format) => `beakjs.${format}.js`,
     },

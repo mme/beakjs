@@ -1,6 +1,6 @@
 import { mockContentResponses, mockFunctionResponse } from "../utils";
-import { ChatCompletion } from "../../core/openai/chat";
-import { OpenAIFunction, OpenAIMessage } from "../../core/openai/types";
+import { ChatCompletion } from "../../src/openai/chat";
+import { OpenAIFunction, OpenAIMessage } from "../../src/openai/types";
 
 global.fetch = jest.fn();
 

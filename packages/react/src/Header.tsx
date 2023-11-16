@@ -1,6 +1,6 @@
 import React from "react";
 import { HeaderProps } from "./props";
-import "../css/Header.css";
+import "../../css/Header.css";
 import { useBeakThemeContext } from "./Theme";
 import { useBeakContext } from "./Beak";
 
