@@ -84,7 +84,7 @@ export const Beak: React.FC<BeakProps> = ({
       labels: {
         ...{
           initial: "",
-          title: "Copilot Chat",
+          title: "Assistant",
           placeholder: "Type a message...",
           thinking: "Thinking...",
           done: "✅ Done",
