@@ -8,6 +8,8 @@ Beak.js lets you integrate custom conversational assistants into your React appl
 - **Easy to Use** - Integrates with your existing React app in just a few lines of code.
 - **Open Source** - Beak.js is open source and free to use.
 
+<img src="docs/img/screenshot.png" width="500" alt="Beak.js Screenshot">
+
 ## Getting Started
 
 ### Installation
