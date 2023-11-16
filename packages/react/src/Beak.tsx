@@ -1,7 +1,19 @@
 import React, { useMemo } from "react";
 import { BeakCore, OpenAIModel, DebugLogger } from "@beakjs/core";
+import * as DefaultIcons from "./Icons";
 
 const DEFAULT_DEBUG_LOGGER = new DebugLogger([]);
+
+export type BeakColorScheme = "auto" | "light" | "dark";
+
+export interface BeakIcons {
+  openIcon?: React.ReactNode;
+  closeIcon?: React.ReactNode;
+  headerCloseIcon?: React.ReactNode;
+  sendIcon?: React.ReactNode;
+  activityIcon?: React.ReactNode;
+  spinnerIcon?: React.ReactNode;
+}
 
 interface BeakLabels {
   initial?: string | string[];
@@ -15,8 +27,9 @@ interface BeakLabels {
 interface BeakContext {
   beak: BeakCore;
   labels: Required<BeakLabels>;
+  icons: Required<BeakIcons>;
+  colorScheme: BeakColorScheme;
   debugLogger: DebugLogger;
-  theme: BeakTheme;
 }
 
 export const BeakContext = React.createContext<BeakContext | undefined>(
@@ -33,8 +46,6 @@ export function useBeakContext(): BeakContext {
   return context;
 }
 
-type BeakTheme = "auto" | "light" | "dark";
-
 interface BeakProps {
   openAIApiKey: string;
   openAIModel?: OpenAIModel;
@@ -43,7 +54,6 @@ interface BeakProps {
   maxFeedback?: number;
   labels?: BeakLabels;
   debugLogger?: DebugLogger;
-  theme?: BeakTheme;
   children?: React.ReactNode;
 }
 
@@ -55,7 +65,6 @@ export const Beak: React.FC<BeakProps> = ({
   maxFeedback,
   labels,
   debugLogger,
-  theme,
   children,
 }) => {
   const beak = useMemo(
@@ -93,9 +102,17 @@ export const Beak: React.FC<BeakProps> = ({
       },
 
       debugLogger: debugLogger || DEFAULT_DEBUG_LOGGER,
-      theme: theme || "auto",
+      colorScheme: "auto" as BeakColorScheme,
+      icons: {
+        openIcon: DefaultIcons.OpenIcon,
+        closeIcon: DefaultIcons.CloseIcon,
+        headerCloseIcon: DefaultIcons.HeaderCloseIcon,
+        sendIcon: DefaultIcons.SendIcon,
+        activityIcon: DefaultIcons.ActivityIcon,
+        spinnerIcon: DefaultIcons.SpinnerIcon,
+      },
     }),
-    [labels, debugLogger, theme]
+    [labels, debugLogger]
   );
   return (
     <BeakContext.Provider value={context}>{children}</BeakContext.Provider>

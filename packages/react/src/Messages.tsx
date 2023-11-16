@@ -1,12 +1,10 @@
 import React, { useEffect } from "react";
 import { MessagesProps } from "./props";
 import { useBeakContext } from "./Beak";
-import { useBeakThemeContext } from "./Theme";
 import "../../css/Messages.css";
 
 export const Messages: React.FC<MessagesProps> = ({ messages }) => {
   const context = useBeakContext();
-  const themeContext = useBeakThemeContext();
   const messagesEndRef = React.useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
@@ -34,13 +32,13 @@ export const Messages: React.FC<MessagesProps> = ({ messages }) => {
           if (message.status === "pending" && !message.content) {
             return (
               <div key={index} className={`beakMessage beakAssistantMessage`}>
-                {themeContext.icons.spinnerIcon}
+                {context.icons.spinnerIcon}
               </div>
             );
           } else if (message.status === "partial") {
             return (
               <div key={index} className={`beakMessage beakAssistantMessage`}>
-                {context.labels.thinking} {themeContext.icons.spinnerIcon}
+                {context.labels.thinking} {context.icons.spinnerIcon}
               </div>
             );
           } else if (message.content) {
