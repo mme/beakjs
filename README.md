@@ -94,6 +94,16 @@ const MyApp = () => {
 
 By using `useBeakFunction` together with `useBeakInfo`, your assistant can see what's happening on the screen and take action within your app depending on the current context.
 
+## Run the Demo
+
+```bash
+git clone git@github.com:mme/beakjs.git && cd beakjs
+yarn && yarn build
+cd demo/presentation
+echo "VITE_OPENAI_API_KEY=sk-your-openai-key" > .env
+yarn && yarn dev
+```
+
 ## Issues
 
 Feel free to submit issues and enhancement requests.
