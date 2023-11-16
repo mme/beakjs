@@ -96,6 +96,8 @@ By using `useBeakFunction` together with `useBeakInfo`, your assistant can see w
 
 ## Run the Demo
 
+To run the demo, build the project and start the demo app:
+
 ```bash
 git clone git@github.com:mme/beakjs.git && cd beakjs
 yarn && yarn build
@@ -103,6 +105,8 @@ cd demo/presentation
 echo "VITE_OPENAI_API_KEY=sk-your-openai-key" > .env
 yarn && yarn dev
 ```
+
+Then go to http://localhost:5173/ to see the demo.
 
 ## Issues
 
