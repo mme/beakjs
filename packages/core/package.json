@@ -18,7 +18,6 @@
   "dependencies": {
     "@beakjs/openai": "0.0.5",
     "eventemitter3": "^5.0.1",
-    "jsonrepair": "^3.2.4",
     "uuid": "^9.0.1"
   },
   "devDependencies": {
