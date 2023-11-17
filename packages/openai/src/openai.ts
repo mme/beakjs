@@ -5,15 +5,11 @@ import {
   OpenAIModel,
   OpenAIFunction,
   OpenAIMessage,
-} from "./types";
-import {
   DebugLogger,
-  FunctionCall,
-  FunctionDefinition,
-  Message,
-} from "../types";
-import { ChatCompletion } from "./chat";
-import { QueryChatCompletionParams } from "../types";
+  NoopDebugLogger,
+  DEFAULT_MODEL,
+} from "./types";
+import { ChatCompletion, FetchChatCompletionParams } from "./chat";
 
 interface OpenAIConfiguration {
   apiKey: string;
@@ -45,19 +41,20 @@ export class OpenAI extends EventEmitter<OpenAIEvents> {
   constructor(params: OpenAIConfiguration) {
     super();
     this.apiKey = params.apiKey;
-    this.model = params.model || "gpt-4";
-    this.debug = params.debugLogger || new DebugLogger();
+    this.model = params.model || DEFAULT_MODEL;
+    this.debug = params.debugLogger || NoopDebugLogger;
   }
 
-  public async queryChatCompletion(params: QueryChatCompletionParams) {
+  public async queryChatCompletion(params: FetchChatCompletionParams) {
+    params = { ...params };
     params.maxTokens ||= maxTokensForModel(this.model);
     params.functions ||= [];
-
-    const prompt = this.buildPrompt(params);
-    return await this.runPrompt({ prompt, ...params });
+    params.model = this.model;
+    params.messages = this.buildPrompt(params);
+    return await this.runPrompt(params);
   }
 
-  private buildPrompt(params: QueryChatCompletionParams): OpenAIMessage[] {
+  private buildPrompt(params: FetchChatCompletionParams): OpenAIMessage[] {
     let maxTokens = params.maxTokens!;
     const messages = params.messages!;
     const functions = params.functions!;
@@ -86,7 +83,7 @@ export class OpenAI extends EventEmitter<OpenAIEvents> {
     const reversedMessages = [...messages].reverse();
     for (const message of reversedMessages) {
       if (message.role === "system") {
-        result.unshift(messageToOpenAI(message));
+        result.unshift(message);
         continue;
       } else if (cutoff) {
         continue;
@@ -96,22 +93,14 @@ export class OpenAI extends EventEmitter<OpenAIEvents> {
         cutoff = true;
         continue;
       }
-      result.unshift(messageToOpenAI(message));
+      result.unshift(message);
       maxTokens -= numTokens;
     }
 
     return result;
   }
 
-  private async runPrompt(
-    params: QueryChatCompletionParams & { prompt: OpenAIMessage[] }
-  ): Promise<void> {
-    const model = this.model;
-    const messages = params.prompt;
-    const functions = params.functions;
-    const functionCall = params.functionCall;
-    const temperature = params.temperature;
-
+  private async runPrompt(params: FetchChatCompletionParams): Promise<void> {
     this.completionClient = new ChatCompletion({
       apiKey: this.apiKey,
       debugLogger: this.debug,
@@ -121,13 +110,7 @@ export class OpenAI extends EventEmitter<OpenAIEvents> {
     this.completionClient.on("error", this.onError);
     this.completionClient.on("end", this.onEnd);
 
-    await this.completionClient.fetchChatCompletion({
-      model,
-      messages,
-      functions: functionsToOpenAIFormat(functions),
-      functionCall,
-      temperature,
-    });
+    await this.completionClient.fetchChatCompletion(params);
   }
 
   private onData = (data: OpenAIChatCompletionChunk) => {
@@ -212,13 +195,11 @@ export class OpenAI extends EventEmitter<OpenAIEvents> {
     this.functionCallArguments = "";
   }
 
-  public countTokens(message: Message): number {
+  public countTokens(message: OpenAIMessage): number {
     if (message.content) {
       return estimateTokens(message.content);
-    } else if (message.functionCall) {
-      return estimateTokens(
-        JSON.stringify(functionCallToOpenAI(message.functionCall))
-      );
+    } else if (message.function_call) {
+      return estimateTokens(JSON.stringify(message.function_call));
     }
     return 0;
   }
@@ -238,63 +219,8 @@ const maxTokensByModel: { [key in OpenAIModel]: number } = {
   "gpt-3.5-turbo-16k-0613": 16385,
 };
 
-function functionsToOpenAIFormat(
-  functions?: FunctionDefinition[]
-): OpenAIFunction[] | undefined {
-  if (functions === undefined) {
-    return undefined;
-  }
-  return functions.map((fun) => {
-    const args = fun.parameters;
-    let openAiProperties: { [key: string]: any } = {};
-    let required: string[] = [];
-
-    if (args) {
-      for (const [name, arg] of Object.entries(args)) {
-        const description = arg.description;
-        if (typeof arg.type === "string" || arg.type === undefined) {
-          const type = arg.type || "string";
-          openAiProperties[name] = {
-            type: arg.type,
-            ...(description ? { description } : {}),
-          };
-        } else if (Array.isArray(arg.type)) {
-          openAiProperties[name] = {
-            type: "enum",
-            enum: arg.type,
-            ...(description ? { description } : {}),
-          };
-        }
-
-        if (arg.optional !== true) {
-          required.push(name);
-        }
-      }
-    }
-
-    return {
-      name: fun.name,
-      description: fun.description,
-      parameters: {
-        type: "object",
-        properties: openAiProperties,
-        ...(required.length ? { required } : {}),
-      },
-    };
-  });
-}
-
 function estimateTokens(text: string): number {
   return text.length / 3;
-}
-
-function countFunctionsTokens(functions: FunctionDefinition[]): number {
-  if (functions.length === 0) {
-    return 0;
-  }
-  const openAIFunctions = functionsToOpenAIFormat(functions);
-  const json = JSON.stringify(openAIFunctions);
-  return estimateTokens(json);
 }
 
 function maxTokensForModel(model: OpenAIModel): number {
@@ -315,33 +241,10 @@ function fixJson(json: string): string {
   return jsonrepair(json);
 }
 
-function functionCallToOpenAI(functionCall?: FunctionCall): any {
-  if (functionCall === undefined) {
-    return undefined;
+function countFunctionsTokens(functions: OpenAIFunction[]): number {
+  if (functions.length === 0) {
+    return 0;
   }
-  return {
-    name: functionCall.name,
-    arguments: JSON.stringify(functionCall.arguments),
-  };
-}
-
-function messageToOpenAI(message: Message): OpenAIMessage {
-  const content = message.content || "";
-  if (message.role === "system") {
-    return { role: message.role, content };
-  } else if (message.role === "function") {
-    return {
-      role: message.role,
-      content,
-      name: message.name,
-    };
-  } else {
-    let functionCall = functionCallToOpenAI(message.functionCall);
-
-    return {
-      role: message.role,
-      content,
-      ...(functionCall !== undefined && { function_call: functionCall }),
-    };
-  }
+  const json = JSON.stringify(functions);
+  return estimateTokens(json);
 }

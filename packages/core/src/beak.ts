@@ -1,7 +1,7 @@
 import { EventEmitter } from "eventemitter3";
-import { OpenAI, OpenAIModel } from "./openai";
+import { OpenAI, OpenAIModel } from "@beakjs/openai";
 import {
-  LLMClient,
+  LLMAdapter,
   Message,
   FunctionDefinition,
   FunctionCall,
@@ -9,6 +9,7 @@ import {
   DebugLogger,
 } from "./types";
 import { v4 as uuidv4 } from "uuid";
+import { OpenAIAdapter } from "./openai";
 
 const DEFAULT_INSTRUCTIONS =
   "Assistant is running inside a web application. Assistant never returns JSON " +
@@ -57,7 +58,7 @@ export class BeakCore extends EventEmitter<BeakEvents> {
     super();
     this.configuration = configuration;
 
-    let client = this.newClient();
+    let client = this.newAdapter();
     this.instructionsMessage = new Message({
       role: "system",
       content: this.configuration.instructions || DEFAULT_INSTRUCTIONS,
@@ -135,7 +136,7 @@ export class BeakCore extends EventEmitter<BeakEvents> {
       content: content,
       status: "success",
     });
-    userMessage.calculateNumTokens(this.newClient());
+    userMessage.calculateNumTokens(this.newAdapter());
 
     this._messages.push(userMessage);
     this.emit("change", userMessage.copy());
@@ -152,7 +153,7 @@ export class BeakCore extends EventEmitter<BeakEvents> {
       this._messages.push(message);
       this.emit("change", message.copy());
 
-      const client = this.newClient();
+      const client = this.newAdapter();
 
       const contextMessage = this.infoMessage();
       let newMessages: Message[] = [];
@@ -314,7 +315,7 @@ export class BeakCore extends EventEmitter<BeakEvents> {
   }
 
   private async runChatCompletionAsync(
-    client: LLMClient,
+    client: LLMAdapter,
     params: QueryChatCompletionParams
   ) {
     return new Promise<Message[]>((resolve, reject) => {
@@ -394,11 +395,13 @@ export class BeakCore extends EventEmitter<BeakEvents> {
     });
   }
 
-  private newClient(): LLMClient {
-    return new OpenAI({
-      apiKey: this.configuration.openAIApiKey,
-      model: this.configuration.openAIModel,
-      debugLogger: this.configuration.debugLogger,
-    });
+  private newAdapter(): LLMAdapter {
+    return new OpenAIAdapter(
+      new OpenAI({
+        apiKey: this.configuration.openAIApiKey,
+        model: this.configuration.openAIModel,
+        debugLogger: this.configuration.debugLogger,
+      })
+    );
   }
 }

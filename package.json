@@ -26,12 +26,12 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "yarn workspace @beakjs/core build && yarn workspace @beakjs/react build",
+    "build": "yarn workspaces run build",
     "prepublishOnly": "yarn build",
     "serve": "vite preview",
     "test": "jest",
     "sync-versions": "ts-node scripts/sync-versions.ts",
-    "clean": "rm -rf dist && rm -rf src/react/dist && rm -rf src/core/dist"
+    "clean": "yarn workspaces run clean"
   },
   "jest": {
     "testTimeout": 60000,
@@ -53,6 +53,7 @@
   ],
   "private": true,
   "workspaces": [
+    "packages/openai",
     "packages/core",
     "packages/react",
     "packages/server"

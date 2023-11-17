@@ -1,6 +1,11 @@
 import EventEmitter from "eventemitter3";
-import { DebugLogger } from "../types";
-import { OpenAIMessage, OpenAIFunction } from "./types";
+import {
+  OpenAIMessage,
+  OpenAIFunction,
+  DebugLogger,
+  NoopDebugLogger,
+  DEFAULT_MODEL,
+} from "./types";
 
 interface ChatCompletionConfiguration {
   apiKey: string;
@@ -13,12 +18,13 @@ interface ChatCompletionEvents {
   error: any;
 }
 
-interface FetchChatCompletionParams {
-  model: string;
+export interface FetchChatCompletionParams {
+  model?: string;
   messages: OpenAIMessage[];
   functions?: OpenAIFunction[];
   functionCall?: "none" | "auto";
   temperature?: number;
+  maxTokens?: number;
 }
 
 export class ChatCompletion extends EventEmitter<ChatCompletionEvents> {
@@ -32,7 +38,7 @@ export class ChatCompletion extends EventEmitter<ChatCompletionEvents> {
   constructor({ apiKey, debugLogger }: ChatCompletionConfiguration) {
     super();
     this.apiKey = apiKey;
-    this.debug = debugLogger || new DebugLogger();
+    this.debug = debugLogger || NoopDebugLogger;
   }
 
   private async cleanup() {
@@ -61,6 +67,7 @@ export class ChatCompletion extends EventEmitter<ChatCompletionEvents> {
     functionCall ||= "auto";
     temperature ||= 0.5;
     functions ||= [];
+    model ||= DEFAULT_MODEL;
 
     if (functions.length == 0) {
       functionCall = undefined;
