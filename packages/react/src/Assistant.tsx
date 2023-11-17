@@ -25,7 +25,7 @@ interface AssistantWindowProps {
   clickOutsideToClose?: boolean;
   hitEscapeToClose?: boolean;
   hotkey?: string;
-  icons?: Required<BeakIcons>;
+  icons?: BeakIcons;
   colorScheme?: BeakColorScheme;
   Window?: React.ComponentType<WindowProps>;
   Button?: React.ComponentType<ButtonProps>;
