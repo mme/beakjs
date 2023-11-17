@@ -7,6 +7,7 @@ import {
   OpenAIMessage,
   DebugLogger,
   NoopDebugLogger,
+  DEFAULT_MODEL,
 } from "./types";
 import { ChatCompletion, FetchChatCompletionParams } from "./chat";
 
@@ -40,23 +41,20 @@ export class OpenAI extends EventEmitter<OpenAIEvents> {
   constructor(params: OpenAIConfiguration) {
     super();
     this.apiKey = params.apiKey;
-    this.model = params.model || "gpt-4";
+    this.model = params.model || DEFAULT_MODEL;
     this.debug = params.debugLogger || NoopDebugLogger;
   }
 
-  public async queryChatCompletion(
-    params: FetchChatCompletionParams & { maxTokens: number }
-  ) {
+  public async queryChatCompletion(params: FetchChatCompletionParams) {
+    params = { ...params };
     params.maxTokens ||= maxTokensForModel(this.model);
     params.functions ||= [];
-
-    const prompt = this.buildPrompt(params);
-    return await this.runPrompt({ prompt, ...params });
+    params.model = this.model;
+    params.messages = this.buildPrompt(params);
+    return await this.runPrompt(params);
   }
 
-  private buildPrompt(
-    params: FetchChatCompletionParams & { maxTokens: number }
-  ): OpenAIMessage[] {
+  private buildPrompt(params: FetchChatCompletionParams): OpenAIMessage[] {
     let maxTokens = params.maxTokens!;
     const messages = params.messages!;
     const functions = params.functions!;
@@ -102,15 +100,7 @@ export class OpenAI extends EventEmitter<OpenAIEvents> {
     return result;
   }
 
-  private async runPrompt(
-    params: FetchChatCompletionParams & { prompt: OpenAIMessage[] }
-  ): Promise<void> {
-    const model = this.model;
-    const messages = params.prompt;
-    const functions = params.functions;
-    const functionCall = params.functionCall;
-    const temperature = params.temperature;
-
+  private async runPrompt(params: FetchChatCompletionParams): Promise<void> {
     this.completionClient = new ChatCompletion({
       apiKey: this.apiKey,
       debugLogger: this.debug,
@@ -120,13 +110,7 @@ export class OpenAI extends EventEmitter<OpenAIEvents> {
     this.completionClient.on("error", this.onError);
     this.completionClient.on("end", this.onEnd);
 
-    await this.completionClient.fetchChatCompletion({
-      model,
-      messages,
-      functions: functions,
-      functionCall,
-      temperature,
-    });
+    await this.completionClient.fetchChatCompletion(params);
   }
 
   private onData = (data: OpenAIChatCompletionChunk) => {
@@ -234,52 +218,6 @@ const maxTokensByModel: { [key in OpenAIModel]: number } = {
   "gpt-4-32k-0613": 32768,
   "gpt-3.5-turbo-16k-0613": 16385,
 };
-
-// function functionsToOpenAIFormat(
-//   functions?: FunctionDefinition[]
-// ): OpenAIFunction[] | undefined {
-//   if (functions === undefined) {
-//     return undefined;
-//   }
-//   return functions.map((fun) => {
-//     const args = fun.parameters;
-//     let openAiProperties: { [key: string]: any } = {};
-//     let required: string[] = [];
-
-//     if (args) {
-//       for (const [name, arg] of Object.entries(args)) {
-//         const description = arg.description;
-//         if (typeof arg.type === "string" || arg.type === undefined) {
-//           const type = arg.type || "string";
-//           openAiProperties[name] = {
-//             type: arg.type,
-//             ...(description ? { description } : {}),
-//           };
-//         } else if (Array.isArray(arg.type)) {
-//           openAiProperties[name] = {
-//             type: "enum",
-//             enum: arg.type,
-//             ...(description ? { description } : {}),
-//           };
-//         }
-
-//         if (arg.optional !== true) {
-//           required.push(name);
-//         }
-//       }
-//     }
-
-//     return {
-//       name: fun.name,
-//       description: fun.description,
-//       parameters: {
-//         type: "object",
-//         properties: openAiProperties,
-//         ...(required.length ? { required } : {}),
-//       },
-//     };
-//   });
-// }
 
 function estimateTokens(text: string): number {
   return text.length / 3;

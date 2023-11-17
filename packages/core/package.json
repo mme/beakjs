@@ -1,4 +1,6 @@
 {
+  "author": "Markus Ecker",
+  "license": "MIT",
   "name": "@beakjs/core",
   "version": "0.0.5",
   "description": "BeakJS core library",
@@ -7,25 +9,43 @@
   "scripts": {
     "build": "tsc",
     "prepublishOnly": "yarn build",
-    "clean": "rm -rf dist"
+    "clean": "rm -rf dist",
+    "test": "jest"
   },
   "files": [
     "dist/**/*"
   ],
   "dependencies": {
+    "@beakjs/openai": "0.0.5",
     "eventemitter3": "^5.0.1",
     "jsonrepair": "^3.2.4",
     "uuid": "^9.0.1"
   },
   "devDependencies": {
     "@types/uuid": "^9.0.6",
-    "typescript": "^5.0.4"
+    "typescript": "^5.0.4",
+    "@types/jest": "^29.5.1",
+    "jest": "^29.5.0",
+    "ts-jest": "^29.1.0"
   },
   "peerDependencies": {},
   "repository": {
     "type": "git",
     "url": "https://github.com/mme/beakjs.git"
   },
-  "author": "Markus Ecker",
-  "license": "MIT"
+  "jest": {
+    "testTimeout": 60000,
+    "transform": {
+      "^.+\\.(ts|tsx)$": "ts-jest"
+    },
+    "testEnvironment": "node",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ],
+    "testPathIgnorePatterns": [
+      "/node_modules/"
+    ]
+  }
 }

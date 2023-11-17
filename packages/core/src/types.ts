@@ -78,7 +78,7 @@ export class Message {
     Object.assign(this, options);
   }
 
-  calculateNumTokens(llm: LLMClient) {
+  calculateNumTokens(llm: LLMAdapter) {
     this.numTokens = llm.countTokens(this);
   }
 
@@ -112,7 +112,7 @@ export interface FunctionCall {
 
 export type LLMEvent = "content" | "function" | "partial" | "error" | "end";
 
-export abstract class LLMClient {
+export abstract class LLMAdapter {
   abstract countTokens(message: Message): number;
 
   abstract queryChatCompletion(

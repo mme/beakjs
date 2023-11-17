@@ -4,6 +4,7 @@ import {
   OpenAIFunction,
   DebugLogger,
   NoopDebugLogger,
+  DEFAULT_MODEL,
 } from "./types";
 
 interface ChatCompletionConfiguration {
@@ -18,11 +19,12 @@ interface ChatCompletionEvents {
 }
 
 export interface FetchChatCompletionParams {
-  model: string;
+  model?: string;
   messages: OpenAIMessage[];
   functions?: OpenAIFunction[];
   functionCall?: "none" | "auto";
   temperature?: number;
+  maxTokens?: number;
 }
 
 export class ChatCompletion extends EventEmitter<ChatCompletionEvents> {
@@ -65,6 +67,7 @@ export class ChatCompletion extends EventEmitter<ChatCompletionEvents> {
     functionCall ||= "auto";
     temperature ||= 0.5;
     functions ||= [];
+    model ||= DEFAULT_MODEL;
 
     if (functions.length == 0) {
       functionCall = undefined;

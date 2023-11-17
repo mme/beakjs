@@ -53,8 +53,8 @@
   ],
   "private": true,
   "workspaces": [
+    "packages/openai",
     "packages/core",
-    "packages/react",
-    "packages/openai"
+    "packages/react"
   ]
 }

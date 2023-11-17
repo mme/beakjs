@@ -1,4 +1,4 @@
-import { BeakCore } from "../core/beak";
+import { BeakCore } from "../src/beak";
 import { mockContentResponses, mockFunctionResponse } from "./utils";
 
 global.fetch = jest.fn();

@@ -55,3 +55,5 @@ export const NoopDebugLogger: DebugLogger = {
   warn() {},
   error() {},
 };
+
+export const DEFAULT_MODEL = "gpt-4";
