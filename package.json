@@ -57,6 +57,8 @@
     "packages/core",
     "packages/react",
     "packages/server",
-    "packages/nextjs"
+    "packages/next",
+    "packages/remix",
+    "packages/express"
   ]
 }
