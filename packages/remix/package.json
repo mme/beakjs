@@ -12,7 +12,12 @@
     "dist/**/*"
   ],
   "dependencies": {
-    "@beakjs/server": "0.0.5",
+    "@beakjs/server": "0.0.5"
+  },
+  "peerDependencies": {
+    "@remix-run/node": "^2.3.0"
+  },
+  "devDependencies": {
     "@remix-run/node": "^2.3.0"
   },
   "repository": {
