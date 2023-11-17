@@ -1,4 +1,4 @@
-import { Role } from "../types";
+export type OpenAIRole = "system" | "user" | "assistant" | "function";
 
 export type OpenAIModel =
   | "gpt-3.5-turbo"
@@ -16,7 +16,7 @@ export type OpenAIModel =
 export interface OpenAIChatCompletionChunk {
   choices: {
     delta: {
-      role: Role;
+      role: OpenAIRole;
       content?: string | null;
       function_call?: {
         name?: string;
@@ -34,8 +34,26 @@ export interface OpenAIFunction {
 
 export interface OpenAIMessage {
   content?: string;
-  role: Role;
+  role: OpenAIRole;
   numTokens?: number;
   name?: string;
   function_call?: any;
 }
+
+type DebugEvent = "chat-internal" | "chat-api" | "beak-complete";
+
+export interface DebugLogger {
+  log(debugEvent: DebugEvent, ...args: any[]): void;
+  table(debugEvent: DebugEvent, message: string, ...args: any[]): void;
+  warn(debugEvent: DebugEvent, ...args: any[]): void;
+  error(debugEvent: DebugEvent, ...args: any[]): void;
+}
+
+export const NoopDebugLogger: DebugLogger = {
+  log() {},
+  table() {},
+  warn() {},
+  error() {},
+};
+
+export const DEFAULT_MODEL = "gpt-4";

@@ -9,5 +9,4 @@ Thumbs.db
 TODO.md
 TODO.later.md
 
-packages/core/dist
-packages/react/dist
+packages/*/dist

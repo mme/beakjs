@@ -20,10 +20,12 @@ jobs:
           yarn install
       - name: Build (core)
         run: |
-          yarn workspace @beakjs/core build
-      - name: Build (react)
+          yarn build
+      - name: Publish (openai)
         run: |
-          yarn workspace @beakjs/react build
+          yarn workspace @beakjs/openai publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       - name: Publish (core)
         run: |
           yarn workspace @beakjs/core publish --access public
