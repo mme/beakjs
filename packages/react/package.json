@@ -1,7 +1,7 @@
 {
   "name": "@beakjs/react",
   "version": "0.0.5",
-  "description": "React library for BeakJS",
+  "description": "React library for Beak.js",
   "main": "dist/beakjs.umd.js",
   "module": "dist/beakjs.es.js",
   "types": "dist/index.d.ts",

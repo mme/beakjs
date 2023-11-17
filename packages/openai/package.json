@@ -3,7 +3,7 @@
   "version": "0.0.5",
   "author": "Markus Ecker",
   "license": "MIT",
-  "description": "BeakJS OpenAI library",
+  "description": "Beak.js OpenAI library",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {

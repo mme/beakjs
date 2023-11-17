@@ -56,6 +56,7 @@
     "packages/openai",
     "packages/core",
     "packages/react",
-    "packages/server"
+    "packages/server",
+    "packages/nextjs"
   ]
 }

@@ -1,25 +1,31 @@
 import Bottleneck from "bottleneck";
-import { FetchChatCompletionParams } from "@beakjs/core";
+import { ChatCompletion, FetchChatCompletionParams } from "@beakjs/openai";
 
-interface BeakProxyProps {
+export interface BeakProxyProps {
   openAIApiKey: string;
-  rateLimiterOptions?: RateLimiterOptions;
+  rateLimiterOptions?: RateLimiter;
 }
 
-interface RateLimiterOptions {
+interface RateLimiter {
   requestsPerSecond?: number;
   maxConcurrent?: number;
   requestPerSecondByClient?: number;
   maxConcurrentByClient?: number;
+  redis?: RedisConfiguration;
 }
 
-interface HttpAdapter {
+interface RedisConfiguration {
+  host: string;
+  port?: number;
+}
+
+export interface HttpAdapter {
   onEnd: () => void;
   onData: (data: any) => void;
   onError: (error: any) => void;
 }
 
-class BeakProxy {
+export class BeakProxy {
   private openAIApiKey: string;
   private rateLimiter: Bottleneck;
   private rateLimiterGroup: Bottleneck.Group;
@@ -33,66 +39,55 @@ class BeakProxy {
     rateLimiterOptions.requestPerSecondByClient ||= 0.5;
     rateLimiterOptions.maxConcurrentByClient ||= 1;
 
+    const datastore = rateLimiterOptions.redis ? "redis" : "local";
+    let clientOptions: any = {};
+    if (rateLimiterOptions.redis) {
+      clientOptions["clientOptions"] = {
+        host: rateLimiterOptions.redis.host,
+        port: rateLimiterOptions.redis.port || 6379,
+      };
+    }
+
     this.rateLimiter = new Bottleneck({
       maxConcurrent: rateLimiterOptions.maxConcurrent,
-      minTime: 1000 / rateLimiterOptions.requestsPerSecond,
+      minTime: Math.round(1000 / rateLimiterOptions.requestsPerSecond),
+      datastore,
+      ...clientOptions,
     });
 
     this.rateLimiterGroup = new Bottleneck.Group({
       maxConcurrent: rateLimiterOptions.maxConcurrentByClient,
-      minTime: 1000 / rateLimiterOptions.requestPerSecondByClient,
+      minTime: Math.round(1000 / rateLimiterOptions.requestPerSecondByClient),
+      datastore,
+      ...clientOptions,
     });
   }
 
-  private handleRequestImplementation(
+  private async handleRequestImplementation(
     params: FetchChatCompletionParams,
     adapter: HttpAdapter
-  ) {}
+  ) {
+    const chat = new ChatCompletion({ apiKey: this.openAIApiKey });
+    chat.on("data", (data) => adapter.onData(data));
+    chat.on("error", (error) => adapter.onError(error));
+    chat.on("end", () => adapter.onEnd());
+    await chat.fetchChatCompletion(params);
+  }
 
-  // }
-
-  // public async fetchChatCompletion({
-  //   model,
-  //   messages,
-  //   functions,
-  //   functionCall,
-  //   temperature,
-  // }: FetchChatCompletionParams): Promise<void> {
-  //   await this.cleanup();
-
-  //   functionCall ||= "auto";
-  //   temperature ||= 0.5;
-  //   functions ||= [];
-
-  //   if (functions.length == 0) {
-  //     functionCall = undefined;
-  //   }
-
-  //   try {
-  //     this.debug.log("chat-api", "Fetching chat completion...");
-  //     this.debug.table("chat-api", "Params", {
-  //       model,
-  //       functionCall,
-  //       temperature,
-  //     });
-  //     this.debug.table("chat-api", "Functions", functions);
-  //     this.debug.table("chat-api", "Messages", messages);
-
-  //     const response = await fetch(this.API_CHAT_COMPLETION_URL, {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //         Authorization: `Bearer ${this.apiKey}`,
-  //       },
-  //       body: JSON.stringify({
-  //         model,
-  //         messages,
-  //         stream: true,
-  //         ...(functions.length ? { functions } : {}),
-  //         ...(temperature ? { temperature } : {}),
-  //         ...(functionCall && functions.length
-  //           ? { function_call: functionCall }
-  //           : {}),
-  //       }),
-  //     });
+  async handleRequest(
+    params: FetchChatCompletionParams,
+    adapter: HttpAdapter,
+    rateLimiterKey?: string
+  ) {
+    if (rateLimiterKey) {
+      await this.rateLimiter.schedule(async () => {});
+      await this.rateLimiterGroup.key(rateLimiterKey).schedule(async () => {
+        await this.handleRequestImplementation(params, adapter);
+      });
+    } else {
+      await this.rateLimiter.schedule(async () => {
+        await this.handleRequestImplementation(params, adapter);
+      });
+    }
+  }
 }

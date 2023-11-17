@@ -1,7 +1,7 @@
 {
-  "name": "@beakjs/server",
+  "name": "@beakjs/nextjs",
   "version": "0.0.5",
-  "description": "Beak.js OpenAI Proxy Server",
+  "description": "Beak.js proxy for Next.js",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
@@ -12,8 +12,8 @@
     "dist/**/*"
   ],
   "dependencies": {
-    "@beakjs/openai": "0.0.5",
-    "bottleneck": "^2.19.5"
+    "@beakjs/server": "0.0.5",
+    "next": "^14.0.3"
   },
   "repository": {
     "type": "git",
