@@ -13,7 +13,8 @@
   ],
   "dependencies": {
     "@beakjs/openai": "0.0.5",
-    "bottleneck": "^2.19.5"
+    "bottleneck": "^2.19.5",
+    "redis": "^4.6.10"
   },
   "repository": {
     "type": "git",
