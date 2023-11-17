@@ -2,12 +2,10 @@ import React, { useRef, useState } from "react";
 import TextareaAutosize from "react-textarea-autosize";
 import { InputProps } from "./props";
 import { useBeakContext } from "./Beak";
-import { useBeakThemeContext } from "./Theme";
 import "../../css/Input.css";
 
 export const Input: React.FC<InputProps> = ({ inProgress, onSend }) => {
   const context = useBeakContext();
-  const themeContext = useBeakThemeContext();
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   const handleDivClick = (event: React.MouseEvent<HTMLDivElement>) => {
@@ -26,9 +24,7 @@ export const Input: React.FC<InputProps> = ({ inProgress, onSend }) => {
     textareaRef.current?.focus();
   };
 
-  const icon = inProgress
-    ? themeContext.icons.activityIcon
-    : themeContext.icons.sendIcon;
+  const icon = inProgress ? context.icons.activityIcon : context.icons.sendIcon;
   const disabled = inProgress || text.length === 0;
 
   return (

@@ -1,7 +1,11 @@
 import React, { useCallback, useEffect, useMemo } from "react";
-import { useBeakContext } from "./Beak";
+import {
+  BeakColorScheme,
+  BeakContext,
+  BeakIcons,
+  useBeakContext,
+} from "./Beak";
 import { Message } from "@beakjs/core";
-import { ColorScheme, Icons, Theme } from "./Theme";
 import {
   ButtonProps,
   HeaderProps,
@@ -21,8 +25,8 @@ interface AssistantWindowProps {
   clickOutsideToClose?: boolean;
   hitEscapeToClose?: boolean;
   hotkey?: string;
-  icons?: Required<Icons>;
-  colorScheme?: ColorScheme;
+  icons?: BeakIcons;
+  colorScheme?: BeakColorScheme;
   Window?: React.ComponentType<WindowProps>;
   Button?: React.ComponentType<ButtonProps>;
   Header?: React.ComponentType<HeaderProps>;
@@ -68,9 +72,25 @@ export const AssistantWindow: React.FC<AssistantWindowProps> = ({
     await beak.runChatCompletion(message);
   };
 
+  const ctx = useMemo(() => {
+    return {
+      ...context,
+      icons: {
+        ...context.icons,
+        ...icons,
+      },
+      colorScheme: colorScheme || context.colorScheme,
+    };
+  }, [context, icons, colorScheme]);
+
+  const colorSchemeClass =
+    "beakColorScheme" +
+    ctx.colorScheme[0].toUpperCase() +
+    ctx.colorScheme.slice(1);
+
   return (
-    <Theme colorScheme={colorScheme} icons={icons || {}}>
-      <div className="beakAssistantWindow">
+    <BeakContext.Provider value={ctx}>
+      <div className={`beakAssistantWindow ${colorSchemeClass}`}>
         <Button open={open} setOpen={setOpen}></Button>
         <Window
           open={open}
@@ -84,7 +104,7 @@ export const AssistantWindow: React.FC<AssistantWindowProps> = ({
           <Input inProgress={inProgress} onSend={sendMessage} />
         </Window>
       </div>
-    </Theme>
+    </BeakContext.Provider>
   );
 };
 
