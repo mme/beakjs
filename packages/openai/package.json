@@ -1,7 +1,7 @@
 {
-  "name": "@beakjs/core",
+  "name": "@beakjs/openai",
   "version": "0.0.5",
-  "description": "BeakJS core library",
+  "description": "BeakJS OpenAI library",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
