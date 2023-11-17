@@ -12,7 +12,8 @@
     "dist/**/*"
   ],
   "dependencies": {
-    "@beakjs/core": "0.0.5"
+    "@beakjs/core": "0.0.5",
+    "bottleneck": "^2.19.5"
   },
   "repository": {
     "type": "git",
