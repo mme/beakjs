@@ -1,0 +1,23 @@
+{
+  "name": "@beakjs/server",
+  "version": "1.0.0",
+  "description": "BeakJS OpenAI Proxy Server",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "prepublishOnly": "yarn build"
+  },
+  "files": [
+    "dist/**/*"
+  ],
+  "dependencies": {
+    "@beakjs/core": "0.0.5"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mme/beakjs.git"
+  },
+  "author": "Markus Ecker",
+  "license": "MIT"
+}
