@@ -1,5 +1,5 @@
 {
-  "name": "@beakjs/nextjs",
+  "name": "@beakjs/next",
   "version": "0.0.5",
   "description": "Beak.js proxy for Next.js",
   "main": "dist/index.js",
