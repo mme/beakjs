@@ -1,5 +1,4 @@
 import { Request, Response } from "express";
-import bodyParser from "body-parser";
 import { BeakProxy, BeakProxyProps, HttpAdapter } from "@beakjs/server";
 import { FetchChatCompletionParams } from "@beakjs/openai";
 
@@ -20,7 +19,7 @@ export function createBeakHandler(
           rateLimiterKey = await getRateLimiterKey(req);
         }
 
-        await beakProxy.handleRequest(params, adapter);
+        await beakProxy.handleRequest(params, adapter, rateLimiterKey);
       } catch (error: any) {
         console.error(error);
         res.status(500).send("Internal Server Error.");

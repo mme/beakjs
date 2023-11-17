@@ -26,7 +26,7 @@ export function createBeakHandler(
             }
 
             const adapter = createStreamingHttpAdapter(controller);
-            await beakProxy.handleRequest(params, adapter);
+            await beakProxy.handleRequest(params, adapter, rateLimiterKey);
           } catch (error) {
             console.error(error);
             controller.error("Internal Server Error");

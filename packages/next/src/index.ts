@@ -19,7 +19,7 @@ export function createBeakHandler(
           rateLimiterKey = await getRateLimiterKey(req);
         }
 
-        await beakProxy.handleRequest(params, adapter);
+        await beakProxy.handleRequest(params, adapter, rateLimiterKey);
       } catch (error) {
         console.error(error);
         res.status(500).send("Internal Server Error.");
