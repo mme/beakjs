@@ -28,9 +28,10 @@ export interface FetchChatCompletionParams {
   maxTokens?: number;
 }
 
+const DEFAULT_BASE_URL = "https://api.openai.com";
+const COMPLETIONS_PATH = "/v1/chat/completions";
+
 export class ChatCompletion extends EventEmitter<ChatCompletionEvents> {
-  // private readonly API_CHAT_COMPLETION_URL =
-  //   "https://api.openai.com/v1/chat/completions";
   private apiKey?: string;
   private buffer = new Uint8Array();
   private bodyReader: ReadableStreamDefaultReader<Uint8Array> | null = null;
@@ -42,8 +43,11 @@ export class ChatCompletion extends EventEmitter<ChatCompletionEvents> {
     this.apiKey = apiKey;
     this.debug = debugLogger || NoopDebugLogger;
     this.url =
-      (baseUrl || "https://api.openai.com").replace(/\/$/, "") +
-      "/v1/chat/completions";
+      (baseUrl || DEFAULT_BASE_URL).replace(/\/$/, "") + COMPLETIONS_PATH;
+
+    if (!apiKey && !baseUrl) {
+      console.warn("No API key or base URL provided.");
+    }
   }
 
   private async cleanup() {
@@ -67,6 +71,11 @@ export class ChatCompletion extends EventEmitter<ChatCompletionEvents> {
     functionCall,
     temperature,
   }: FetchChatCompletionParams): Promise<void> {
+    console.log("-----------------------");
+    console.log("fetchChatCompletion");
+    console.log("API key:", this.apiKey);
+    console.log("-----------------------");
+
     await this.cleanup();
 
     functionCall ||= "auto";

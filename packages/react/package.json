@@ -8,7 +8,7 @@
   "scripts": {
     "build": "vite build",
     "prepublishOnly": "yarn build",
-    "clean": "rm -rf dist"
+    "clean": "rm -rf dist && rm -rf node_modules"
   },
   "files": [
     "dist/**/*"

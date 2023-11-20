@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import { InputProps } from "./props";
 import { useBeakContext } from "./Beak";
 import "../../css/Input.css";
-import AutoResizingTextarea from "./TextArea";
+import AutoResizingTextarea from "./Textarea";
 
 export const Input: React.FC<InputProps> = ({ inProgress, onSend }) => {
   const context = useBeakContext();

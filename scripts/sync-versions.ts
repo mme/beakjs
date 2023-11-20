@@ -7,8 +7,13 @@ const otherPackageJsonPaths = [
   rootPackageJsonPath,
   "./packages/openai/package.json",
   "./packages/server/package.json",
+  "./packages/express/package.json",
+  "./packages/next/package.json",
+  "./packages/remix/package.json",
   "./packages/core/package.json",
   "./packages/react/package.json",
+  "./demo/frontend/presentation/package.json",
+  "./demo/backend/next/package.json",
 ];
 
 // This function reads the VERSION file and returns the version string

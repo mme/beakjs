@@ -31,7 +31,7 @@
     "serve": "vite preview",
     "test": "jest",
     "sync-versions": "ts-node scripts/sync-versions.ts",
-    "clean": "yarn workspaces run clean"
+    "clean": "rm -rf dist && rm -rf node_modules && yarn workspaces run clean"
   },
   "jest": {
     "testTimeout": 60000,
@@ -59,6 +59,8 @@
     "packages/server",
     "packages/next",
     "packages/remix",
-    "packages/express"
+    "packages/express",
+    "demo/frontend/presentation",
+    "demo/backend/next"
   ]
 }
