@@ -1,8 +1,8 @@
 import React, { useRef, useState } from "react";
-import TextareaAutosize from "react-textarea-autosize";
 import { InputProps } from "./props";
 import { useBeakContext } from "./Beak";
 import "../../css/Input.css";
+import AutoResizingTextarea from "./TextArea";
 
 export const Input: React.FC<InputProps> = ({ inProgress, onSend }) => {
   const context = useBeakContext();
@@ -32,7 +32,7 @@ export const Input: React.FC<InputProps> = ({ inProgress, onSend }) => {
       <button disabled={disabled} onClick={send}>
         {icon}
       </button>
-      <TextareaAutosize
+      <AutoResizingTextarea
         ref={textareaRef}
         placeholder={context.labels.placeholder}
         autoFocus={true}
