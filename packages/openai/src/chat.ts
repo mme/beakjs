@@ -71,11 +71,6 @@ export class ChatCompletion extends EventEmitter<ChatCompletionEvents> {
     functionCall,
     temperature,
   }: FetchChatCompletionParams): Promise<void> {
-    console.log("-----------------------");
-    console.log("fetchChatCompletion");
-    console.log("API key:", this.apiKey);
-    console.log("-----------------------");
-
     await this.cleanup();
 
     functionCall ||= "auto";
