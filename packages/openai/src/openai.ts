@@ -12,7 +12,8 @@ import {
 import { ChatCompletion, FetchChatCompletionParams } from "./chat";
 
 interface OpenAIConfiguration {
-  apiKey: string;
+  apiKey?: string;
+  baseUrl?: string;
   model?: OpenAIModel;
   debugLogger?: DebugLogger;
 }
@@ -29,7 +30,8 @@ interface OpenAIEvents {
 }
 
 export class OpenAI extends EventEmitter<OpenAIEvents> {
-  private apiKey: string;
+  private apiKey?: string;
+  private baseUrl?: string;
   private model: OpenAIModel;
   private debug: DebugLogger;
 
@@ -43,6 +45,7 @@ export class OpenAI extends EventEmitter<OpenAIEvents> {
     this.apiKey = params.apiKey;
     this.model = params.model || DEFAULT_MODEL;
     this.debug = params.debugLogger || NoopDebugLogger;
+    this.baseUrl = params.baseUrl;
   }
 
   public async queryChatCompletion(params: FetchChatCompletionParams) {
@@ -103,6 +106,7 @@ export class OpenAI extends EventEmitter<OpenAIEvents> {
   private async runPrompt(params: FetchChatCompletionParams): Promise<void> {
     this.completionClient = new ChatCompletion({
       apiKey: this.apiKey,
+      baseUrl: this.baseUrl,
       debugLogger: this.debug,
     });
 

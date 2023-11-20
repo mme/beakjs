@@ -2,10 +2,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { BeakProxy, BeakProxyProps, HttpAdapter } from "@beakjs/server";
 import { FetchChatCompletionParams } from "@beakjs/openai";
 
-export function createBeakHandler(
-  beakProps: BeakProxyProps,
-  getRateLimiterKey: (req: NextApiRequest) => Promise<string | undefined>
-) {
+export function createBeakHandler(beakProps: BeakProxyProps<NextApiRequest>) {
   const beakProxy = new BeakProxy(beakProps);
 
   async function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -14,12 +11,7 @@ export function createBeakHandler(
 
       try {
         const params = req.body as FetchChatCompletionParams;
-        let rateLimiterKey: string | undefined = undefined;
-        if (getRateLimiterKey) {
-          rateLimiterKey = await getRateLimiterKey(req);
-        }
-
-        await beakProxy.handleRequest(params, adapter, rateLimiterKey);
+        await beakProxy.handleRequest(req, params, adapter);
       } catch (error) {
         console.error(error);
         res.status(500).send("Internal Server Error.");

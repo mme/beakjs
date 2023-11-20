@@ -14,7 +14,7 @@ const App = () => {
   const debugLogger = new DebugLogger(["chat-api"]);
   return (
     <Beak
-      openAIApiKey={openAIApiKey}
+      __unsafeOpenAIApiKey__={openAIApiKey}
       instructions="Assistant is running in a web app and gives presentations on any topic."
       labels={{
         initial: "Hi you! 👋 I can give you a presentation on any topic.",

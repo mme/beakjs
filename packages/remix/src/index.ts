@@ -3,8 +3,7 @@ import { FetchChatCompletionParams } from "@beakjs/openai";
 import { ActionFunction, DataFunctionArgs } from "@remix-run/node";
 
 export function createBeakHandler(
-  beakProps: BeakProxyProps,
-  getRateLimiterKey: (request: Request) => string | undefined
+  beakProps: BeakProxyProps<Request>
 ): ActionFunction {
   const beakProxy = new BeakProxy(beakProps);
 
@@ -20,13 +19,8 @@ export function createBeakHandler(
         async start(controller) {
           try {
             const params: FetchChatCompletionParams = await request.json();
-            let rateLimiterKey: string | undefined = undefined;
-            if (getRateLimiterKey) {
-              rateLimiterKey = await getRateLimiterKey(request);
-            }
-
             const adapter = createStreamingHttpAdapter(controller);
-            await beakProxy.handleRequest(params, adapter, rateLimiterKey);
+            await beakProxy.handleRequest(request, params, adapter);
           } catch (error) {
             console.error(error);
             controller.error("Internal Server Error");

@@ -21,4 +21,7 @@ export default defineConfig({
       },
     },
   },
+  ssr: {
+    target: "node",
+  },
 });

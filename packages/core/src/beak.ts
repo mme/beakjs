@@ -20,7 +20,8 @@ const FORMATTING_INSTRUCTIONS =
   "use the function call interface.";
 
 export interface BeakConfiguration {
-  openAIApiKey: string;
+  openAIApiKey?: string;
+  baseUrl?: string;
   openAIModel?: OpenAIModel;
   maxFeedback?: number;
   instructions?: string;
@@ -399,6 +400,7 @@ export class BeakCore extends EventEmitter<BeakEvents> {
     return new OpenAIAdapter(
       new OpenAI({
         apiKey: this.configuration.openAIApiKey,
+        baseUrl: this.configuration.baseUrl,
         model: this.configuration.openAIModel,
         debugLogger: this.configuration.debugLogger,
       })

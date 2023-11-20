@@ -8,7 +8,8 @@ import {
 } from "./types";
 
 interface ChatCompletionConfiguration {
-  apiKey: string;
+  apiKey?: string;
+  baseUrl?: string;
   debugLogger?: DebugLogger;
 }
 
@@ -28,17 +29,21 @@ export interface FetchChatCompletionParams {
 }
 
 export class ChatCompletion extends EventEmitter<ChatCompletionEvents> {
-  private readonly API_CHAT_COMPLETION_URL =
-    "https://api.openai.com/v1/chat/completions";
-  private apiKey: string;
+  // private readonly API_CHAT_COMPLETION_URL =
+  //   "https://api.openai.com/v1/chat/completions";
+  private apiKey?: string;
   private buffer = new Uint8Array();
   private bodyReader: ReadableStreamDefaultReader<Uint8Array> | null = null;
   private debug: DebugLogger;
+  private url: string;
 
-  constructor({ apiKey, debugLogger }: ChatCompletionConfiguration) {
+  constructor({ apiKey, baseUrl, debugLogger }: ChatCompletionConfiguration) {
     super();
     this.apiKey = apiKey;
     this.debug = debugLogger || NoopDebugLogger;
+    this.url =
+      (baseUrl || "https://api.openai.com").replace(/\/$/, "") +
+      "/v1/chat/completions";
   }
 
   private async cleanup() {
@@ -83,11 +88,11 @@ export class ChatCompletion extends EventEmitter<ChatCompletionEvents> {
       this.debug.table("chat-api", "Functions", functions);
       this.debug.table("chat-api", "Messages", messages);
 
-      const response = await fetch(this.API_CHAT_COMPLETION_URL, {
+      const response = await fetch(this.url, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${this.apiKey}`,
+          ...(this.apiKey ? { Authorization: `Bearer ${this.apiKey}` } : {}),
         },
         body: JSON.stringify({
           model,

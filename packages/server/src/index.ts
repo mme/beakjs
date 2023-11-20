@@ -1,9 +1,10 @@
 import Bottleneck from "bottleneck";
 import { ChatCompletion, FetchChatCompletionParams } from "@beakjs/openai";
 
-export interface BeakProxyProps {
+export interface BeakProxyProps<T> {
   openAIApiKey: string;
   rateLimiterOptions?: RateLimiter;
+  rateLimiterKey?: (req: T) => string | undefined;
 }
 
 interface RateLimiter {
@@ -25,12 +26,13 @@ export interface HttpAdapter {
   onError: (error: any) => void;
 }
 
-export class BeakProxy {
+export class BeakProxy<T> {
   private openAIApiKey: string;
   private rateLimiter: Bottleneck;
   private rateLimiterGroup: Bottleneck.Group;
+  private rateLimiterKey?: (req: T) => string | undefined;
 
-  constructor({ openAIApiKey, rateLimiterOptions }: BeakProxyProps) {
+  constructor({ openAIApiKey, rateLimiterOptions }: BeakProxyProps<T>) {
     this.openAIApiKey = openAIApiKey;
 
     rateLimiterOptions ||= {};
@@ -75,10 +77,13 @@ export class BeakProxy {
   }
 
   async handleRequest(
+    req: T,
     params: FetchChatCompletionParams,
-    adapter: HttpAdapter,
-    rateLimiterKey?: string
+    adapter: HttpAdapter
   ) {
+    const rateLimiterKey = this.rateLimiterKey
+      ? this.rateLimiterKey(req)
+      : undefined;
     if (rateLimiterKey) {
       await this.rateLimiter.schedule(async () => {});
       await this.rateLimiterGroup.key(rateLimiterKey).schedule(async () => {

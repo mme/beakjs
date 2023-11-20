@@ -1,17 +1,19 @@
 {
-  "name": "next",
-  "version": "0.1.0",
+  "name": "@beakjs/backend-demo-next",
+  "version": "0.0.5",
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "echo 'Not building backend demo'",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
     "react": "^18",
     "react-dom": "^18",
-    "next": "14.0.3"
+    "next": "14.0.3",
+    "@beakjs/core": "0.0.5",
+    "@beakjs/react": "0.0.5"
   },
   "devDependencies": {
     "typescript": "^5",
