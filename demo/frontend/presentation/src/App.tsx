@@ -4,7 +4,7 @@ import {
   AssistantWindow,
   useBeakInfo,
   useBeakFunction,
-} from "../../../packages/react/src";
+} from "../../../../packages/react/src";
 
 import { DebugLogger } from "@beakjs/core";
 import "./App.css";
