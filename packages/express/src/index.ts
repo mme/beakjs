@@ -41,6 +41,12 @@ function createHttpAdapter(res: Response): HttpAdapter {
 }
 
 async function parseBody<T>(req: Request): Promise<T> {
+  if (req.body) {
+    return req.body as T;
+  }
+  if (!req.readable) {
+    throw new Error("No body found.");
+  }
   const rawData = await new Promise<string>((resolve, reject) => {
     let data = "";
     req.on("data", (chunk) => (data += chunk));
