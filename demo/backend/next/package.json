@@ -1,10 +1,10 @@
 {
-  "name": "@beakjs/backend-demo-next",
+  "name": "demo-backend-next",
   "version": "0.0.5",
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "echo 'Not building backend demo'",
+    "build": "echo 'Not building next backend demo'",
     "start": "next start",
     "lint": "next lint",
     "clean": "rm -rf node_modules && rm -rf .next && rm -rf dist"
@@ -13,8 +13,8 @@
     "react": "^18",
     "react-dom": "^18",
     "next": "14.0.3",
-    "@beakjs/core": "0.0.5",
-    "@beakjs/react": "0.0.5"
+    "@beakjs/react": "0.0.5",
+    "@beakjs/next": "0.0.5"
   },
   "devDependencies": {
     "typescript": "^5",

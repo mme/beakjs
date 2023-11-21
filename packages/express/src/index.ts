@@ -1,6 +1,10 @@
 import { Request, Response } from "express";
-import { BeakProxy, BeakProxyProps, HttpAdapter } from "@beakjs/server";
-import { FetchChatCompletionParams } from "@beakjs/openai";
+import {
+  BeakProxy,
+  BeakProxyProps,
+  HttpAdapter,
+  FetchChatCompletionParams,
+} from "@beakjs/server";
 
 export function createBeakHandler(beakProps: BeakProxyProps<Request>) {
   const beakProxy = new BeakProxy(beakProps);

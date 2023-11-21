@@ -14,6 +14,7 @@ const otherPackageJsonPaths = [
   "./packages/react/package.json",
   "./demo/frontend/presentation/package.json",
   "./demo/backend/next/package.json",
+  "./demo/backend/express/package.json",
 ];
 
 // This function reads the VERSION file and returns the version string

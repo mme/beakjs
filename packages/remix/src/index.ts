@@ -1,5 +1,9 @@
-import { BeakProxy, BeakProxyProps, HttpAdapter } from "@beakjs/server";
-import { FetchChatCompletionParams } from "@beakjs/openai";
+import {
+  BeakProxy,
+  BeakProxyProps,
+  HttpAdapter,
+  FetchChatCompletionParams,
+} from "@beakjs/server";
 import { ActionFunction, DataFunctionArgs } from "@remix-run/node";
 
 export function createBeakHandler(

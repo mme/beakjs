@@ -1,5 +1,6 @@
 import Bottleneck from "bottleneck";
 import { ChatCompletion, FetchChatCompletionParams } from "@beakjs/openai";
+export type { FetchChatCompletionParams } from "@beakjs/openai";
 
 export interface BeakProxyProps<T> {
   openAIApiKey: string;

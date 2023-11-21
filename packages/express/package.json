@@ -4,6 +4,7 @@
   "description": "Beak.js proxy for Express",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "type": "module",
   "scripts": {
     "build": "tsc",
     "prepublishOnly": "yarn build",
