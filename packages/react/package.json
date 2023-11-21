@@ -1,6 +1,6 @@
 {
   "name": "@beakjs/react",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "React library for Beak.js",
   "main": "dist/beakjs.umd.js",
   "module": "dist/beakjs.es.js",
@@ -14,7 +14,7 @@
     "dist/**/*"
   ],
   "dependencies": {
-    "@beakjs/core": "0.0.5"
+    "@beakjs/core": "0.0.6"
   },
   "devDependencies": {
     "@types/react": "^18.2.15",

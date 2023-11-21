@@ -1,13 +1,13 @@
 {
   "compilerOptions": {
-    "target": "es6",
+    "target": "ES6",
     "module": "ESNext",
     "declaration": true,
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "outDir": "dist",
+    "outDir": "dist/esm",
     "lib": ["esnext", "DOM"],
     "allowJs": true,
     "allowSyntheticDefaultImports": true,

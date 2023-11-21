@@ -1,6 +1,6 @@
 {
   "name": "@beakjs/server",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Beak.js OpenAI Proxy Server",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -13,7 +13,7 @@
     "dist/**/*"
   ],
   "dependencies": {
-    "@beakjs/openai": "0.0.5",
+    "@beakjs/openai": "0.0.6",
     "bottleneck": "^2.19.5",
     "redis": "^4.6.10"
   },

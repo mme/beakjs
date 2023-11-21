@@ -1,6 +1,6 @@
 {
   "name": "@beakjs/remix",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Beak.js proxy for Remix",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -13,7 +13,7 @@
     "dist/**/*"
   ],
   "dependencies": {
-    "@beakjs/server": "0.0.5"
+    "@beakjs/server": "0.0.6"
   },
   "peerDependencies": {
     "@remix-run/node": "^2.3.0"

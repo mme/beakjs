@@ -2,12 +2,13 @@
   "author": "Markus Ecker",
   "license": "MIT",
   "name": "@beakjs/core",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "BeakJS core library",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "types": "dist/cjs/index.d.ts",
   "scripts": {
-    "build": "tsc",
+    "build": "tsc -p tsconfig.cjs.json && tsc -p tsconfig.esm.json",
     "prepublishOnly": "yarn build",
     "clean": "rm -rf dist && rm -rf node_modules",
     "test": "jest"
@@ -16,7 +17,7 @@
     "dist/**/*"
   ],
   "dependencies": {
-    "@beakjs/openai": "0.0.5",
+    "@beakjs/openai": "0.0.6",
     "eventemitter3": "^5.0.1",
     "uuid": "^9.0.1"
   },
