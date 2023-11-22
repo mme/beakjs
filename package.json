@@ -62,6 +62,7 @@
     "packages/express",
     "demo/frontend/presentation",
     "demo/backend/next",
-    "demo/backend/express"
+    "demo/backend/express",
+    "demo/backend/remix"
   ]
 }

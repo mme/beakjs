@@ -1,5 +1,4 @@
-"use client";
-
+import type { MetaFunction } from "@remix-run/node";
 import { useState } from "react";
 import {
   Beak,
@@ -8,20 +7,25 @@ import {
   useBeakFunction,
 } from "@beakjs/react";
 
-import { DebugLogger } from "@beakjs/core";
+import "../styles/global.css";
+
+export const meta: MetaFunction = () => {
+  return [
+    { title: "New Remix App" },
+    { name: "description", content: "Welcome to Remix!" },
+  ];
+};
 
 const App = () => {
-  const debugLogger = new DebugLogger(["chat-api"]);
   return (
     <Beak
-      baseUrl="/api/beak"
+      baseUrl="/beak"
       instructions="Assistant is running in a web app and gives presentations on any topic."
       labels={{
         initial: "Hi you! 👋 I can give you a presentation on any topic.",
         thinking: "Presenting Slide...",
         done: "✅ Slide presented.",
       }}
-      debugLogger={debugLogger}
     >
       <Presentation />
       <AssistantWindow />
@@ -69,7 +73,7 @@ type SlideProps = {
   backgroundImage: string;
 };
 
-const Slide = ({ message, backgroundImage }: SlideProps) => {
+export const Slide = ({ message, backgroundImage }: SlideProps) => {
   if (backgroundImage !== "none") {
     backgroundImage =
       'url("https://source.unsplash.com/featured/?' +

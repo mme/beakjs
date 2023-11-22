@@ -16,6 +16,8 @@
     "Hola",
     "Mundo",
     "OpenAIAPIKey",
-    "nextjs"
+    "nextjs",
+    "typecheck",
+    "isbot"
   ]
 }

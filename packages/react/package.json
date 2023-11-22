@@ -3,8 +3,13 @@
   "version": "0.0.6",
   "description": "React library for Beak.js",
   "main": "dist/beakjs.umd.js",
-  "module": "dist/beakjs.es.js",
+  "module": "dist/beakjs.es.mjs",
   "types": "dist/index.d.ts",
+  "exports": {
+    "import": "./dist/beakjs.es.mjs",
+    "require": "./dist/beakjs.umd.js",
+    "types": "./dist/index.d.ts"
+  },
   "scripts": {
     "build": "vite build",
     "prepublishOnly": "yarn build",

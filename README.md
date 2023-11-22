@@ -32,7 +32,7 @@ import { Beak } from "@beakjs/react";
 
 const App = () => (
   <Beak
-    openAIApiKey="sk-..."
+    __unsafeOpenAIApiKey__="sk-..."
     instructions="Assistant is running in a web app and helps the user with XYZ."
   >
     <MyApp />

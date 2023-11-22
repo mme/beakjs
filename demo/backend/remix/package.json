@@ -1,0 +1,37 @@
+{
+  "name": "demo-backend-remix",
+  "version": "0.0.6",
+  "private": true,
+  "sideEffects": false,
+  "type": "module",
+  "scripts": {
+    "build": "remix build",
+    "dev": "remix dev --manual",
+    "start": "remix-serve ./build/index.js",
+    "typecheck": "tsc",
+    "clean": "rm -rf build node_modules public/build",
+    "routes": "remix routes"
+  },
+  "dependencies": {
+    "@remix-run/css-bundle": "^2.3.0",
+    "@remix-run/node": "^2.3.0",
+    "@remix-run/react": "^2.3.0",
+    "@remix-run/serve": "^2.3.0",
+    "isbot": "^3.6.8",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "@beakjs/remix": "0.0.6",
+    "@beakjs/react": "0.0.6"
+  },
+  "devDependencies": {
+    "@remix-run/dev": "^2.3.0",
+    "@remix-run/eslint-config": "^2.3.0",
+    "@types/react": "^18.2.20",
+    "@types/react-dom": "^18.2.7",
+    "eslint": "^8.38.0",
+    "typescript": "^5.1.6"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

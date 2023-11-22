@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "echo 'Not building next backend demo'",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "clean": "rm -rf node_modules && rm -rf .next && rm -rf dist"
