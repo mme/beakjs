@@ -9,12 +9,13 @@
   "types": "dist/cjs/index.d.ts",
   "scripts": {
     "build": "tsc -p tsconfig.cjs.json && tsc -p tsconfig.esm.json",
-    "prepublishOnly": "yarn build",
+    "prepublishOnly": "cp ../../README.md .",
     "clean": "rm -rf dist && rm -rf node_modules",
     "test": "jest"
   },
   "files": [
-    "dist/**/*"
+    "dist/**/*",
+    "README.md"
   ],
   "dependencies": {
     "eventemitter3": "^5.0.1",

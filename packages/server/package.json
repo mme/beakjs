@@ -6,11 +6,12 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc",
-    "prepublishOnly": "yarn build",
+    "prepublishOnly": "cp ../../README.md .",
     "clean": "rm -rf dist && rm -rf node_modules"
   },
   "files": [
-    "dist/**/*"
+    "dist/**/*",
+    "README.md"
   ],
   "dependencies": {
     "@beakjs/openai": "0.0.6",
