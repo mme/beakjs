@@ -8,7 +8,7 @@ Beak.js contains everything you need to create custom AI-powered assistants for 
 - **Easy to Use** - Integrates with your existing React app in just a few lines of code.
 - **Open Source** - Beak.js is open source and free to use.
 
-<img src="docs/img/screenshot.png" width="500" alt="Beak.js Screenshot">
+<img src="https://github.com/mme/beakjs/raw/main/docs/img/screenshot.png" width="500" alt="Beak.js Screenshot">
 
 ## Getting Started
 

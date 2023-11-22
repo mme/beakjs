@@ -12,11 +12,12 @@
   },
   "scripts": {
     "build": "vite build",
-    "prepublishOnly": "yarn build",
+    "prepublishOnly": "cp ../../README.md .",
     "clean": "rm -rf dist && rm -rf node_modules"
   },
   "files": [
-    "dist/**/*"
+    "dist/**/*",
+    "README.md"
   ],
   "dependencies": {
     "@beakjs/core": "0.0.6"
