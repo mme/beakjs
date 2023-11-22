@@ -13,6 +13,10 @@ export type OpenAIModel =
   | "gpt-4-32k-0613"
   | "gpt-3.5-turbo-16k-0613";
 
+export class CustomModel {
+  constructor(public name: string) {}
+}
+
 export interface OpenAIChatCompletionChunk {
   choices: {
     delta: {

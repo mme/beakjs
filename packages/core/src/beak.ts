@@ -1,5 +1,5 @@
 import { EventEmitter } from "eventemitter3";
-import { OpenAI, OpenAIModel } from "@beakjs/openai";
+import { OpenAI, OpenAIModel, CustomModel } from "@beakjs/openai";
 import {
   LLMAdapter,
   Message,
@@ -22,7 +22,7 @@ const FORMATTING_INSTRUCTIONS =
 export interface BeakConfiguration {
   openAIApiKey?: string;
   baseUrl?: string;
-  openAIModel?: OpenAIModel;
+  openAIModel?: OpenAIModel | CustomModel;
   maxFeedback?: number;
   instructions?: string;
   temperature?: number;
