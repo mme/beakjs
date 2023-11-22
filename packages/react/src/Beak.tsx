@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import { BeakCore, OpenAIModel, DebugLogger } from "@beakjs/core";
+import { BeakCore, OpenAIModel, CustomModel, DebugLogger } from "@beakjs/core";
 import * as DefaultIcons from "./Icons";
 
 const DEFAULT_DEBUG_LOGGER = new DebugLogger([]);
@@ -49,7 +49,7 @@ export function useBeakContext(): BeakContext {
 interface BeakProps {
   __unsafeOpenAIApiKey__?: string;
   baseUrl?: string;
-  openAIModel?: OpenAIModel;
+  openAIModel?: OpenAIModel | CustomModel;
   temperature?: number;
   instructions?: string;
   maxFeedback?: number;

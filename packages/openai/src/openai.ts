@@ -8,13 +8,14 @@ import {
   DebugLogger,
   NoopDebugLogger,
   DEFAULT_MODEL,
+  CustomModel,
 } from "./types";
 import { ChatCompletion, FetchChatCompletionParams } from "./chat";
 
 interface OpenAIConfiguration {
   apiKey?: string;
   baseUrl?: string;
-  model?: OpenAIModel;
+  model?: OpenAIModel | CustomModel;
   debugLogger?: DebugLogger;
 }
 
@@ -32,7 +33,7 @@ interface OpenAIEvents {
 export class OpenAI extends EventEmitter<OpenAIEvents> {
   private apiKey?: string;
   private baseUrl?: string;
-  private model: OpenAIModel;
+  private model: OpenAIModel | CustomModel;
   private debug: DebugLogger;
 
   private completionClient: ChatCompletion | null = null;
@@ -50,9 +51,14 @@ export class OpenAI extends EventEmitter<OpenAIEvents> {
 
   public async queryChatCompletion(params: FetchChatCompletionParams) {
     params = { ...params };
-    params.maxTokens ||= maxTokensForModel(this.model);
+    if (!(this.model instanceof CustomModel)) {
+      params.maxTokens ||= maxTokensForModel(this.model);
+    } else if (!params.maxTokens) {
+      throw new Error("maxTokens must be specified for custom models.");
+    }
     params.functions ||= [];
-    params.model = this.model;
+    params.model =
+      this.model instanceof CustomModel ? this.model.name : this.model;
     params.messages = this.buildPrompt(params);
     return await this.runPrompt(params);
   }
