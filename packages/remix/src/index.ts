@@ -1,15 +1,15 @@
 import {
-  BeakProxy,
-  BeakProxyProps,
+  BeakServer,
+  BeakServerProps,
   HttpAdapter,
   FetchChatCompletionParams,
 } from "@beakjs/server";
 import { ActionFunction, DataFunctionArgs } from "@remix-run/node";
 
-export function createBeakHandler(
-  beakProps: BeakProxyProps<Request>
+export function beakHandler(
+  beakProps?: BeakServerProps<Request>
 ): ActionFunction {
-  const beakProxy = new BeakProxy(beakProps);
+  const beakServer = new BeakServer(beakProps);
 
   return async ({ request }: DataFunctionArgs) => {
     const url = new URL(request.url);
@@ -24,7 +24,7 @@ export function createBeakHandler(
           try {
             const params: FetchChatCompletionParams = await request.json();
             const adapter = createStreamingHttpAdapter(controller);
-            await beakProxy.handleRequest(request, params, adapter);
+            await beakServer.handleRequest(request, params, adapter);
           } catch (error) {
             console.error(error);
             controller.error("Internal Server Error");

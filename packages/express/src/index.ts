@@ -1,20 +1,20 @@
 import { Request, Response } from "express";
 import {
-  BeakProxy,
-  BeakProxyProps,
+  BeakServer,
+  BeakServerProps,
   HttpAdapter,
   FetchChatCompletionParams,
 } from "@beakjs/server";
 
-export function createBeakHandler(beakProps: BeakProxyProps<Request>) {
-  const beakProxy = new BeakProxy(beakProps);
+export function beakHandler(beakProps?: BeakServerProps<Request>) {
+  const beakServer = new BeakServer(beakProps);
 
   return async function handler(req: Request, res: Response) {
     if (req.path.endsWith("/v1/chat/completions") && req.method === "POST") {
       const adapter = createHttpAdapter(res);
       try {
         const params = await parseBody<FetchChatCompletionParams>(req);
-        await beakProxy.handleRequest(req, params, adapter);
+        await beakServer.handleRequest(req, params, adapter);
       } catch (error: any) {
         console.error(error);
         res.status(500).send("Internal Server Error.");

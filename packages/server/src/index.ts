@@ -2,7 +2,7 @@ import Bottleneck from "bottleneck";
 import { ChatCompletion, FetchChatCompletionParams } from "@beakjs/openai";
 export type { FetchChatCompletionParams } from "@beakjs/openai";
 
-export interface BeakProxyProps<T> {
+export interface BeakServerProps<T> {
   openAIApiKey: string;
   rateLimiterOptions?: RateLimiter;
   rateLimiterKey?: (req: T) => string | undefined;
@@ -27,16 +27,25 @@ export interface HttpAdapter {
   onError: (error: any) => void;
 }
 
-export class BeakProxy<T> {
+export class BeakServer<T> {
   private openAIApiKey: string;
   private rateLimiter: Bottleneck;
   private rateLimiterGroup: Bottleneck.Group;
   private rateLimiterKey?: (req: T) => string | undefined;
 
-  constructor({ openAIApiKey, rateLimiterOptions }: BeakProxyProps<T>) {
-    this.openAIApiKey = openAIApiKey;
+  constructor(props?: BeakServerProps<T>) {
+    if (props?.openAIApiKey) {
+      this.openAIApiKey = props.openAIApiKey;
+    } else if (process.env.OPENAI_API_KEY) {
+      this.openAIApiKey = process.env.OPENAI_API_KEY;
+    } else {
+      throw new Error(
+        "OpenAI API key is not defined. Either set OPENAI_API_KEY environment " +
+          "variable or pass it as a configuration parameter."
+      );
+    }
 
-    rateLimiterOptions ||= {};
+    const rateLimiterOptions = props?.rateLimiterOptions || {};
     rateLimiterOptions.requestsPerSecond ||= 10;
     rateLimiterOptions.maxConcurrent ||= 2;
     rateLimiterOptions.requestPerSecondByClient ||= 0.5;
