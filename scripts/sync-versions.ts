@@ -5,9 +5,17 @@ const versionFilePath = "./VERSION";
 const rootPackageJsonPath = "./package.json";
 const otherPackageJsonPaths = [
   rootPackageJsonPath,
+  "./packages/openai/package.json",
+  "./packages/server/package.json",
+  "./packages/express/package.json",
+  "./packages/next/package.json",
+  "./packages/remix/package.json",
   "./packages/core/package.json",
   "./packages/react/package.json",
-  "./packages/openai/package.json",
+  "./demo/frontend/presentation/package.json",
+  "./demo/backend/next/package.json",
+  "./demo/backend/express/package.json",
+  "./demo/backend/remix/package.json",
 ];
 
 // This function reads the VERSION file and returns the version string

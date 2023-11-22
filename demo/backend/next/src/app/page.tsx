@@ -1,20 +1,20 @@
+"use client";
+
 import { useState } from "react";
 import {
   Beak,
   AssistantWindow,
   useBeakInfo,
   useBeakFunction,
-} from "../../../packages/react/src";
+} from "@beakjs/react";
 
 import { DebugLogger } from "@beakjs/core";
-import "./App.css";
 
 const App = () => {
-  const openAIApiKey = import.meta.env.VITE_OPENAI_API_KEY;
   const debugLogger = new DebugLogger(["chat-api"]);
   return (
     <Beak
-      openAIApiKey={openAIApiKey}
+      baseUrl="/api/beak"
       instructions="Assistant is running in a web app and gives presentations on any topic."
       labels={{
         initial: "Hi you! 👋 I can give you a presentation on any topic.",
@@ -69,7 +69,7 @@ type SlideProps = {
   backgroundImage: string;
 };
 
-export const Slide = ({ message, backgroundImage }: SlideProps) => {
+const Slide = ({ message, backgroundImage }: SlideProps) => {
   if (backgroundImage !== "none") {
     backgroundImage =
       'url("https://source.unsplash.com/featured/?' +

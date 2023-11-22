@@ -14,6 +14,10 @@
     "chatcmpl",
     "uuidv4",
     "Hola",
-    "Mundo"
+    "Mundo",
+    "OpenAIAPIKey",
+    "nextjs",
+    "typecheck",
+    "isbot"
   ]
 }

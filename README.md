@@ -1,6 +1,6 @@
 # 🐦 Beak.js [![X (formerly Twitter) Follow](https://img.shields.io/twitter/follow/mme_xyz?style=flat&logo=x)](https://twitter.com/mme_xyz) [![npm (scoped)](https://img.shields.io/npm/v/%40beakjs/react)](https://www.npmjs.com/package/@beakjs/react)
 
-Beak.js lets you integrate custom conversational assistants into your React applications.
+Beak.js contains everything you need to create custom AI-powered assistants for your React app.
 
 **Key Features:**
 
@@ -32,7 +32,7 @@ import { Beak } from "@beakjs/react";
 
 const App = () => (
   <Beak
-    openAIApiKey="sk-..."
+    __unsafeOpenAIApiKey__="sk-..."
     instructions="Assistant is running in a web app and helps the user with XYZ."
   >
     <MyApp />
@@ -43,7 +43,7 @@ const App = () => (
 
 Now, you've got a chat window ready in the bottom right corner of your website. Give it a try!
 
-**Note:** Don't expose your API key in public-facing apps. We will be adding a solution for securely using your API key soon.
+**Note:** Don't expose your API key in public-facing apps - this is for development only. See [Deployment](#deployment) for information on how to securely deploy your app without compromising your API key.
 
 ### Making Beak.js work with your app
 
@@ -93,6 +93,18 @@ const MyApp = () => {
 ```
 
 By using `useBeakFunction` together with `useBeakInfo`, your assistant can see what's happening on the screen and take action within your app depending on the current context.
+
+## Deployment
+
+To keep your API keys safe, we set up a server that forwards your assistant's requests to OpenAI.
+
+Currently, we support the following deployment options:
+
+- [Next.js](/docs/deployment/next.md)
+- [Remix](/docs/deployment/remix.md)
+- [Express](/docs/deployment/express.md)
+
+Read more by clicking the links above.
 
 ## Run the Demo
 

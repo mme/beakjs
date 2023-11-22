@@ -36,3 +36,23 @@ jobs:
           yarn workspace @beakjs/react publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Publish (server)
+        run: |
+          yarn workspace @beakjs/server publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Publish (next)
+        run: |
+          yarn workspace @beakjs/next publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Publish (next)
+        run: |
+          yarn workspace @beakjs/remix publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Publish (express)
+        run: |
+          yarn workspace @beakjs/express publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

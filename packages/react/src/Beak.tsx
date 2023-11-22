@@ -47,7 +47,8 @@ export function useBeakContext(): BeakContext {
 }
 
 interface BeakProps {
-  openAIApiKey: string;
+  __unsafeOpenAIApiKey__?: string;
+  baseUrl?: string;
   openAIModel?: OpenAIModel;
   temperature?: number;
   instructions?: string;
@@ -58,7 +59,8 @@ interface BeakProps {
 }
 
 export const Beak: React.FC<BeakProps> = ({
-  openAIApiKey,
+  __unsafeOpenAIApiKey__,
+  baseUrl,
   openAIModel,
   temperature,
   instructions,
@@ -70,7 +72,8 @@ export const Beak: React.FC<BeakProps> = ({
   const beak = useMemo(
     () =>
       new BeakCore({
-        openAIApiKey: openAIApiKey,
+        openAIApiKey: __unsafeOpenAIApiKey__,
+        baseUrl: baseUrl,
         openAIModel: openAIModel,
         maxFeedback: maxFeedback,
         instructions: instructions,
@@ -78,7 +81,8 @@ export const Beak: React.FC<BeakProps> = ({
         debugLogger: debugLogger,
       }),
     [
-      openAIApiKey,
+      __unsafeOpenAIApiKey__,
+      baseUrl,
       openAIModel,
       maxFeedback,
       instructions,

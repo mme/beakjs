@@ -9,7 +9,8 @@ export default defineConfig({
     lib: {
       entry: "src/index.ts",
       name: "BeakJS",
-      fileName: (format) => `beakjs.${format}.js`,
+      fileName: (format) =>
+        `beakjs.${format}.${format === "es" ? "mjs" : "js"}`,
     },
     rollupOptions: {
       external: ["react", "react-dom"],
@@ -20,5 +21,8 @@ export default defineConfig({
         },
       },
     },
+  },
+  ssr: {
+    target: "node",
   },
 });

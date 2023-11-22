@@ -1,20 +1,25 @@
 {
   "name": "@beakjs/react",
-  "version": "0.0.5",
-  "description": "React library for BeakJS",
+  "version": "0.0.6",
+  "description": "React library for Beak.js",
   "main": "dist/beakjs.umd.js",
-  "module": "dist/beakjs.es.js",
+  "module": "dist/beakjs.es.mjs",
   "types": "dist/index.d.ts",
+  "exports": {
+    "import": "./dist/beakjs.es.mjs",
+    "require": "./dist/beakjs.umd.js",
+    "types": "./dist/index.d.ts"
+  },
   "scripts": {
     "build": "vite build",
     "prepublishOnly": "yarn build",
-    "clean": "rm -rf dist"
+    "clean": "rm -rf dist && rm -rf node_modules"
   },
   "files": [
     "dist/**/*"
   ],
   "dependencies": {
-    "@beakjs/core": "0.0.5"
+    "@beakjs/core": "0.0.6"
   },
   "devDependencies": {
     "@types/react": "^18.2.15",
