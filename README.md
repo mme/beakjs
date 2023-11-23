@@ -96,9 +96,9 @@ By using `useBeakFunction` together with `useBeakInfo`, your assistant can see w
 
 ## Deployment
 
-To keep your API key safe, we support a server side handler that forwards your assistant's requests to OpenAI. Furthermore, this handler can be used to add authentication and rate limiting to your assistant.
+To keep your API key safe, we use a server side handler that forwards your assistant's requests to OpenAI. Furthermore, this handler can be used to add authentication and rate limiting to your assistant.
 
-Currently, we support the following frameworks:
+Currently, the following frameworks are supported:
 
 - [Next.js](/docs/deployment/next.md)
 - [Remix](/docs/deployment/remix.md)
