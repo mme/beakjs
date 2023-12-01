@@ -1,6 +1,6 @@
 import { mockContentResponses, mockFunctionResponse } from "./utils";
 import { ChatCompletion } from "../src/chat";
-import { OpenAIFunction, OpenAIMessage } from "../src/types";
+import { OpenAIFunction, OpenAIChatMessage } from "../src/types";
 
 global.fetch = jest.fn();
 
@@ -33,7 +33,7 @@ describe("ChatCompletion", () => {
     chatCompletion.on("error", onErrorMock);
     chatCompletion.on("end", onEndMock);
 
-    const messages: OpenAIMessage[] = [
+    const messages: OpenAIChatMessage[] = [
       {
         role: "user",
         content: "Hello!",
@@ -102,7 +102,7 @@ describe("ChatCompletion", () => {
     chatCompletion.on("error", onErrorMock);
     chatCompletion.on("end", onEndMock);
 
-    const messages: OpenAIMessage[] = [
+    const messages: OpenAIChatMessage[] = [
       {
         role: "user",
         content: "Hello!",
@@ -204,7 +204,7 @@ describe("ChatCompletion", () => {
     chatCompletion.on("end", onEndMock);
 
     const model = "gpt-3.5-turbo";
-    const messages: OpenAIMessage[] = [
+    const messages: OpenAIChatMessage[] = [
       {
         role: "user",
         content: "Hello!",

@@ -2,7 +2,7 @@ import {
   OpenAI,
   FetchChatCompletionParams,
   OpenAIFunction,
-  OpenAIMessage,
+  OpenAIChatMessage,
 } from "@beakjs/openai";
 import {
   FunctionCall,
@@ -41,7 +41,7 @@ export class OpenAIAdapter implements LLMAdapter {
   }
 }
 
-function messageToOpenAI(message: Message): OpenAIMessage {
+function messageToOpenAI(message: Message): OpenAIChatMessage {
   const content = message.content || "";
   if (message.role === "system") {
     return { role: message.role, content };

@@ -1,6 +1,6 @@
 import { mockContentResponses, mockFunctionResponse } from "./utils";
 import { OpenAI, FetchChatCompletionParams } from "../src";
-import { OpenAIMessage } from "../src/types";
+import { OpenAIChatMessage } from "../src/types";
 
 global.fetch = jest.fn();
 
@@ -255,7 +255,7 @@ describe("OpenAI", () => {
 
   it("does not remove messages when enough tokens are available", async () => {
     let openai = new OpenAI({ apiKey: "sk-xyz", model: "gpt-3.5-turbo" });
-    const messages: OpenAIMessage[] = [
+    const messages: OpenAIChatMessage[] = [
       { role: "user", content: "Hello world!" },
     ];
     let params: FetchChatCompletionParams = {
@@ -269,7 +269,7 @@ describe("OpenAI", () => {
 
   it("does not remove messages when enough tokens are available", async () => {
     let openai = new OpenAI({ apiKey: "sk-xyz", model: "gpt-3.5-turbo" });
-    const messages: OpenAIMessage[] = [
+    const messages: OpenAIChatMessage[] = [
       { role: "user", content: "Hello world!" },
       { role: "user", content: "Hallo welt!" },
     ];
@@ -285,7 +285,7 @@ describe("OpenAI", () => {
 
   it("does remove messages when too few tokens are available", async () => {
     let openai = new OpenAI({ apiKey: "sk-xyz", model: "gpt-3.5-turbo" });
-    const messages: OpenAIMessage[] = [
+    const messages: OpenAIChatMessage[] = [
       { role: "user", content: "Hello world!" },
       { role: "user", content: "Hallo welt!" },
     ];
@@ -305,7 +305,7 @@ describe("OpenAI", () => {
 
   it("does not remove system messages", async () => {
     let openai = new OpenAI({ apiKey: "sk-xyz", model: "gpt-3.5-turbo" });
-    const messages: OpenAIMessage[] = [
+    const messages: OpenAIChatMessage[] = [
       { role: "system", content: "Hola mundo!" },
       { role: "user", content: "Hello world!" },
       { role: "user", content: "Hallo welt!" },

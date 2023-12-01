@@ -2,7 +2,7 @@ export { OpenAI } from "./openai";
 export { ChatCompletion } from "./chat";
 export type {
   OpenAIModel,
-  OpenAIMessage,
+  OpenAIChatMessage,
   OpenAIFunction,
   CustomModel,
 } from "./types";

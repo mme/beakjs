@@ -4,7 +4,7 @@ import {
   OpenAIChatCompletionChunk,
   OpenAIModel,
   OpenAIFunction,
-  OpenAIMessage,
+  OpenAIChatMessage,
   DebugLogger,
   NoopDebugLogger,
   DEFAULT_MODEL,
@@ -63,7 +63,7 @@ export class OpenAI extends EventEmitter<OpenAIEvents> {
     return await this.runPrompt(params);
   }
 
-  private buildPrompt(params: FetchChatCompletionParams): OpenAIMessage[] {
+  private buildPrompt(params: FetchChatCompletionParams): OpenAIChatMessage[] {
     let maxTokens = params.maxTokens!;
     const messages = params.messages!;
     const functions = params.functions!;
@@ -86,7 +86,7 @@ export class OpenAI extends EventEmitter<OpenAIEvents> {
       }
     }
 
-    const result: OpenAIMessage[] = [];
+    const result: OpenAIChatMessage[] = [];
     let cutoff: boolean = false;
 
     const reversedMessages = [...messages].reverse();
@@ -205,7 +205,7 @@ export class OpenAI extends EventEmitter<OpenAIEvents> {
     this.functionCallArguments = "";
   }
 
-  public countTokens(message: OpenAIMessage): number {
+  public countTokens(message: OpenAIChatMessage): number {
     if (message.content) {
       return estimateTokens(message.content);
     } else if (message.function_call) {

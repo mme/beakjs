@@ -1,6 +1,6 @@
 import EventEmitter from "eventemitter3";
 import {
-  OpenAIMessage,
+  OpenAIChatMessage,
   OpenAIFunction,
   DebugLogger,
   NoopDebugLogger,
@@ -21,7 +21,7 @@ interface ChatCompletionEvents {
 
 export interface FetchChatCompletionParams {
   model?: string;
-  messages: OpenAIMessage[];
+  messages: OpenAIChatMessage[];
   functions?: OpenAIFunction[];
   functionCall?: "none" | "auto";
   temperature?: number;
