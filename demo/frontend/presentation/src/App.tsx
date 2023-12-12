@@ -10,22 +10,46 @@ import { DebugLogger } from "@beakjs/core";
 import "./App.css";
 
 const App = () => {
-  const openAIApiKey = import.meta.env.VITE_OPENAI_API_KEY;
+  const [openAIApiKey, setOpenAIApiKey] = useState(
+    import.meta.env.VITE_OPENAI_API_KEY
+  );
+
   const debugLogger = new DebugLogger(["chat-api"]);
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const form = event.currentTarget;
+    const apiKeyInputElement = form.elements.namedItem(
+      "apiKey"
+    ) as HTMLInputElement;
+
+    if (apiKeyInputElement) {
+      const apiKey = apiKeyInputElement.value;
+      setOpenAIApiKey(apiKey);
+    }
+  };
+
   return (
-    <Beak
-      __unsafeOpenAIApiKey__={openAIApiKey}
-      instructions="Assistant is running in a web app and gives presentations on any topic."
-      labels={{
-        initial: "Hi you! 👋 I can give you a presentation on any topic.",
-        thinking: "Presenting Slide...",
-        done: "✅ Slide presented.",
-      }}
-      debugLogger={debugLogger}
-    >
-      <Presentation />
-      <AssistantWindow />
-    </Beak>
+    <div>
+      {openAIApiKey ? (
+        <Beak
+          __unsafeOpenAIApiKey__={openAIApiKey}
+          instructions="Assistant is running in a web app and gives presentations on any topic. The user can input any topic and the assistant will start presenting."
+          labels={{
+            initial: "Hi you! 👋 I can give you a presentation on any topic.",
+            thinking: "Presenting Slide...",
+            done: "✅ Slide presented.",
+          }}
+          debugLogger={debugLogger}
+        >
+          <Presentation />
+          <AssistantWindow />
+        </Beak>
+      ) : (
+        <ApiKeyForm handleSubmit={handleSubmit} />
+      )}
+    </div>
   );
 };
 
@@ -44,7 +68,7 @@ const Presentation = () => {
     parameters: {
       message: {
         description:
-          "A short message to display in the presentation slide, max 40 words.",
+          "A short message to display in the presentation slide, max 30 words.",
       },
       backgroundImage: {
         description:
@@ -84,6 +108,67 @@ export const Slide = ({ message, backgroundImage }: SlideProps) => {
       }}
     >
       {message}
+    </div>
+  );
+};
+
+const ApiKeyForm = ({ handleSubmit }: { handleSubmit: any }) => {
+  return (
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        height: "100vh",
+        width: "100vw",
+      }}
+    >
+      <form
+        onSubmit={handleSubmit}
+        style={{
+          padding: "20px",
+          border: "1px solid #ddd",
+          borderRadius: "8px",
+          textAlign: "center",
+          margin: "20px",
+        }}
+      >
+        <label
+          htmlFor="apiKey"
+          style={{
+            display: "block",
+            marginBottom: "10px",
+            fontSize: "18px",
+          }}
+        >
+          Enter OpenAI API Key:
+        </label>
+        <input
+          type="text"
+          name="apiKey"
+          placeholder="Enter API Key here"
+          style={{
+            padding: "10px",
+            marginBottom: "10px",
+            border: "1px solid #ccc",
+            borderRadius: "4px",
+            width: "300px",
+          }}
+        />
+        <button
+          type="submit"
+          style={{
+            padding: "10px 20px",
+            backgroundColor: "#007bff",
+            color: "white",
+            border: "none",
+            borderRadius: "4px",
+            cursor: "pointer",
+          }}
+        >
+          Set API Key
+        </button>
+      </form>
     </div>
   );
 };
