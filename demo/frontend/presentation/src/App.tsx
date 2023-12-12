@@ -35,7 +35,7 @@ const App = () => {
       {openAIApiKey ? (
         <Beak
           __unsafeOpenAIApiKey__={openAIApiKey}
-          instructions="Assistant is running in a web app and gives presentations on any topic. The user can input any topic and the assistant will start presenting."
+          instructions="Assistant is running in a web app and gives presentations on any topic. The user can input any topic and the assistant will start presenting. Assistant will always start with a slide."
           labels={{
             initial: "Hi you! 👋 I can give you a presentation on any topic.",
             thinking: "Presenting Slide...",
@@ -44,7 +44,7 @@ const App = () => {
           debugLogger={debugLogger}
         >
           <Presentation />
-          <AssistantWindow />
+          <AssistantWindow defaultOpen={true} />
         </Beak>
       ) : (
         <ApiKeyForm handleSubmit={handleSubmit} />
